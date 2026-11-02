@@ -32,12 +32,18 @@
     .am-whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:70;display:flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:#20b858;color:#fff;text-decoration:none;font:700 15px 'Inter',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .18s,background .18s}.am-whatsapp-float:hover{background:#159447;transform:translateY(-2px)}.am-whatsapp-float svg{width:25px;height:25px;flex:none}
     .am-sold-mark{position:absolute;inset:0;z-index:15;display:grid;place-items:center;pointer-events:none}.am-sold-mark::before{content:"";position:absolute;width:125%;height:8px;background:#d71920;transform:rotate(-24deg);box-shadow:0 1px 3px #0006}.am-sold-mark span{position:relative;padding:8px 18px;background:#d71920;color:#fff;font:800 16px 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;transform:rotate(-8deg);box-shadow:0 2px 8px #0005}
     .am-photo-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}.am-photo-item{position:relative;border:1px solid #ddd;border-radius:9px;overflow:hidden;background:#f5f5f5}.am-photo-item img{display:block;width:100%;height:78px;object-fit:cover}.am-photo-item label{display:flex;align-items:center;gap:5px;padding:6px;font-size:11px}.am-photo-item input{width:auto}
-     .am-detail-gallery{display:grid;gap:12px}.am-detail-main{grid-row:1;position:relative;background:#f2f3f4;border-radius:12px;min-height:300px;display:grid;place-items:center;overflow:hidden}.am-detail-main img{display:block;width:100%;height:min(58vh,520px);object-fit:contain}.am-detail-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;border-radius:50%;width:38px;height:38px;background:#191c1dcc;color:#fff;font-size:24px;cursor:pointer}.am-detail-arrow.prev{left:12px}.am-detail-arrow.next{right:12px}.am-detail-thumbs{grid-row:2;display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}.am-detail-thumb{border:2px solid transparent;border-radius:7px;padding:0;background:#eee;cursor:pointer;flex:0 0 72px;overflow:hidden}.am-detail-thumb.active{border-color:#9d3e00}.am-detail-thumb img{display:block;width:72px;height:54px;object-fit:cover}.am-detail-info{grid-row:3;display:grid;gap:5px}.am-detail-info h2{margin:0;font:700 24px/1.25 'Plus Jakarta Sans',sans-serif}.am-detail-city{color:#9d3e00;font-weight:700}.am-detail-price{font:800 21px 'Plus Jakarta Sans',sans-serif;margin-top:7px}.am-detail-description{color:#62666a;line-height:1.5;margin:8px 0 0;white-space:pre-wrap}
-    .am-detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.am-detail-actions a{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:9px;text-decoration:none;font:700 14px 'Inter',sans-serif}.am-detail-actions .am-whatsapp{background:#20b858;color:#fff}.am-detail-actions .am-contact{background:#191c1d;color:#fff}
+     .am-detail-gallery{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}.am-detail-main{grid-column:1;grid-row:1;position:relative;background:#f2f3f4;border-radius:12px;min-height:300px;display:grid;place-items:center;overflow:hidden}.am-detail-main img{display:block;width:100%;height:min(50vh,430px);object-fit:contain;cursor:zoom-in}.am-detail-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;border-radius:50%;width:38px;height:38px;background:#191c1dcc;color:#fff;font-size:24px;cursor:pointer}.am-detail-arrow.prev{left:12px}.am-detail-arrow.next{right:12px}.am-detail-thumbs{grid-column:1;grid-row:2;display:flex;gap:8px;overflow-x:auto;padding-bottom:3px}.am-detail-thumb{border:2px solid transparent;border-radius:7px;padding:0;background:#eee;cursor:pointer;flex:0 0 72px;overflow:hidden}.am-detail-thumb.active{border-color:#9d3e00}.am-detail-thumb img{display:block;width:72px;height:54px;object-fit:cover}.am-detail-info{grid-column:2;grid-row:1/span 2;display:grid;align-content:start;gap:5px;max-height:min(66vh,600px);overflow:auto;padding-right:36px}.am-detail-info h2{margin:0;font:700 24px/1.25 'Plus Jakarta Sans',sans-serif}.am-detail-city{color:#9d3e00;font-weight:700}.am-detail-price{font:800 21px 'Plus Jakarta Sans',sans-serif;margin-top:7px}.am-detail-description{color:#62666a;line-height:1.5;margin:8px 0 0;white-space:pre-wrap}
+    .am-detail-actions{position:sticky;bottom:0;display:flex;margin-top:10px;padding:10px 0 2px;background:#fff}
+    .am-lightbox{position:fixed;inset:0;z-index:130;display:none;background:#0b0c0d}.am-lightbox.is-open{display:block}
+    .am-lightbox-track{display:flex;height:100vh;height:100dvh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none}.am-lightbox-track::-webkit-scrollbar{display:none}
+    .am-lightbox-slide{flex:0 0 100%;height:100vh;height:100dvh;display:grid;place-items:center;scroll-snap-align:center}
+    .am-lightbox-slide img{max-width:100vw;max-height:100vh;max-height:100dvh;width:auto;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+    .am-lightbox-close{position:fixed;top:16px;right:16px;z-index:132;width:44px;height:44px;border:0;border-radius:50%;background:#ffffff24;color:#fff;font-size:26px;line-height:1;cursor:pointer}
+    .am-lightbox-count{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:132;padding:7px 14px;border-radius:999px;background:#000000a6;color:#fff;font:600 13px 'Inter',sans-serif}.am-detail-actions a{display:inline-flex;flex:1;align-items:center;justify-content:center;padding:12px 16px;border-radius:9px;text-decoration:none;font:700 14px 'Inter',sans-serif}.am-detail-actions .am-contact{background:#191c1d;color:#fff}
     .am-toggle-field{display:flex;align-items:center;gap:10px;margin:18px 0;font-weight:600}.am-toggle{appearance:none;width:44px;height:24px;margin:0;border:0;border-radius:999px;background:#c8cbd0;position:relative;cursor:pointer;transition:background .2s}.am-toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0004;transition:transform .2s}.am-toggle:checked{background:#9d3e00}.am-toggle:checked::after{transform:translateX(20px)}
      .am-finance-badge{position:absolute;top:44px;left:12px;z-index:16;padding:6px 10px;border-radius:6px;background:#16833f;color:#fff;font:800 11px 'Plus Jakarta Sans',sans-serif;letter-spacing:.03em;box-shadow:0 2px 6px #0004}
-     .am-featured-track{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px}.am-featured-track .property-card{flex:0 0 min(86vw,380px);scroll-snap-align:start}.am-featured-track::-webkit-scrollbar{height:8px}.am-featured-track::-webkit-scrollbar-thumb{background:#c8cbd0;border-radius:999px}.am-carousel-controls{display:flex;justify-content:flex-end;gap:8px;margin:-12px 0 16px}.am-carousel-controls button{width:38px;height:38px;border:0;border-radius:50%;background:#191c1d;color:#fff;cursor:pointer;font-size:22px}.am-carousel-controls button:hover{background:#9d3e00}
-    @media(max-width:600px){.am-dialog{padding:20px}.am-title{font-size:21px}.am-admin-row{align-items:flex-start;flex-direction:column}}
+     .am-featured-track{display:flex!important;align-items:stretch;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px}.am-featured-track .property-card{flex:0 0 min(86vw,380px);scroll-snap-align:start}.am-featured-track::-webkit-scrollbar{height:8px}.am-featured-track::-webkit-scrollbar-thumb{background:#c8cbd0;border-radius:999px}.am-carousel-controls{display:flex;justify-content:flex-end;gap:8px;margin:-12px 0 16px}.am-carousel-controls button{width:38px;height:38px;border:0;border-radius:50%;background:#191c1d;color:#fff;cursor:pointer;font-size:22px}.am-carousel-controls button:hover{background:#9d3e00}
+    @media(max-width:820px){.am-detail-gallery{grid-template-columns:1fr}.am-detail-main{grid-column:1;grid-row:1}.am-detail-thumbs{grid-column:1;grid-row:2}.am-detail-info{grid-column:1;grid-row:3;max-height:none;overflow:visible;padding-right:0}.am-detail-actions{position:static}}@media(max-width:600px){.am-dialog{padding:20px}.am-title{font-size:21px}.am-admin-row{align-items:flex-start;flex-direction:column}}
   `;
   document.head.append(style);
   const favicon = document.createElement('link');
@@ -86,6 +92,49 @@
   const dialog = modal.querySelector('.am-dialog');
   const content = modal.querySelector('.am-content');
   const closeButton = modal.querySelector('.am-close');
+  const lightbox = document.createElement('div');
+  lightbox.className = 'am-lightbox';
+  lightbox.innerHTML = '<div class="am-lightbox-track"></div><button class="am-lightbox-close" type="button" aria-label="Cerrar">×</button><div class="am-lightbox-count"></div>';
+  document.body.append(lightbox);
+  const lightboxTrack = lightbox.querySelector('.am-lightbox-track');
+  const lightboxCount = lightbox.querySelector('.am-lightbox-count');
+  let lightboxImages = [];
+  function updateLightboxCount() {
+    const index = Math.round(lightboxTrack.scrollLeft / Math.max(1, lightboxTrack.clientWidth));
+    lightboxCount.textContent = `${Math.min(lightboxImages.length, index + 1)}/${lightboxImages.length}`;
+  }
+  function openLightbox(images, startIndex = 0) {
+    lightboxImages = images;
+    lightboxTrack.innerHTML = images.map((src, index) => `<div class="am-lightbox-slide"><img src="${esc(src)}" alt="Foto ${index + 1}"></div>`).join('');
+    lightbox.classList.add('is-open');
+    requestAnimationFrame(() => { lightboxTrack.scrollLeft = lightboxTrack.children[startIndex]?.offsetLeft || 0; updateLightboxCount(); });
+  }
+  function closeLightbox() { lightbox.classList.remove('is-open'); lightboxTrack.innerHTML = ''; }
+  lightbox.querySelector('.am-lightbox-close').addEventListener('click', closeLightbox);
+  lightboxTrack.addEventListener('scroll', updateLightboxCount, { passive: true });
+  let lightboxWheelAccum = 0;
+  let lightboxWheelLock = 0;
+  lightboxTrack.addEventListener('wheel', event => {
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    event.preventDefault();
+    const now = Date.now();
+    lightboxWheelAccum += event.deltaY;
+    if (now < lightboxWheelLock || Math.abs(lightboxWheelAccum) < 60) return;
+    const direction = Math.sign(lightboxWheelAccum);
+    lightboxWheelAccum = 0;
+    lightboxWheelLock = now + 260;
+    lightboxTrack.scrollBy({ left: direction * lightboxTrack.clientWidth, behavior: 'smooth' });
+  }, { passive: false });
+  let lightboxDrag = null;
+  lightboxTrack.addEventListener('pointerdown', event => {
+    lightboxDrag = { x: event.clientX, left: lightboxTrack.scrollLeft };
+    lightboxTrack.setPointerCapture(event.pointerId);
+    lightboxTrack.style.scrollSnapType = 'none';
+  });
+  lightboxTrack.addEventListener('pointermove', event => { if (lightboxDrag) lightboxTrack.scrollLeft = lightboxDrag.left - (event.clientX - lightboxDrag.x); });
+  const endLightboxDrag = () => { lightboxDrag = null; lightboxTrack.style.scrollSnapType = ''; };
+  lightboxTrack.addEventListener('pointerup', endLightboxDrag);
+  lightboxTrack.addEventListener('pointercancel', endLightboxDrag);
   let session = null;
 
   function openModal(html, wide = false) {
@@ -121,7 +170,15 @@
   }
   closeButton.addEventListener('click', closeModal);
   modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+  document.addEventListener('keydown', event => {
+    if (lightbox.classList.contains('is-open')) {
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowRight') lightboxTrack.scrollBy({ left: lightboxTrack.clientWidth, behavior: 'smooth' });
+      if (event.key === 'ArrowLeft') lightboxTrack.scrollBy({ left: -lightboxTrack.clientWidth, behavior: 'smooth' });
+      return;
+    }
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
   grid.addEventListener('click', event => {
     const button = event.target.closest('.am-card-edit');
     if (!button) return;
@@ -135,7 +192,7 @@
     const images = property.images?.length ? property.images : ['https://placehold.co/1200x760/E9E7E4/695B53?text=Sin+foto'];
     let current = 0;
     const message = `Hola Alejandro, Me interesa recibir mas informacion de ${property.title}.`;
-    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p><div class="am-detail-actions"><a class="am-whatsapp" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">WhatsApp</a><a class="am-contact" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">Contactar</a></div></div><div class="am-detail-main"><button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(images[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(image)}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
+    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p><div class="am-detail-actions"><a class="am-contact" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">Contactar</a></div></div><div class="am-detail-main"><button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(images[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(image)}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
     const image = content.querySelector('#am-detail-image');
     const thumbs = [...content.querySelectorAll('[data-photo-index]')];
     const showPhoto = index => {
@@ -146,6 +203,7 @@
     content.querySelector('.prev').addEventListener('click', () => showPhoto(current - 1));
     content.querySelector('.next').addEventListener('click', () => showPhoto(current + 1));
     thumbs.forEach(thumb => thumb.addEventListener('click', () => showPhoto(Number(thumb.dataset.photoIndex))));
+    image.addEventListener('click', () => openLightbox(images, current));
   }
 
   function attachCardInteractions() {
@@ -167,6 +225,11 @@
         button.dataset.favorited = String(!active);
         const icon = button.querySelector('.fav-icon');
         if (icon) icon.style.fontVariationSettings = active ? "'FILL' 0" : "'FILL' 1";
+      });
+      card.querySelector('.am-card-detail')?.addEventListener('click', event => {
+        event.stopPropagation();
+        const property = properties.find(item => item.id === card.dataset.propertyId);
+        if (property) openPropertyDetail(property);
       });
       card.querySelector('.am-card-edit')?.addEventListener('click', event => {
         event.stopPropagation();
@@ -233,7 +296,7 @@
       : `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary"><strong class="block text-on-surface text-lg mb-2">${sort === 'relevancia' ? 'No hay propiedades destacadas todavía' : 'Próximamente, nuevas propiedades'}</strong>${sort === 'relevancia' ? 'El administrador puede elegirlas desde Editar propiedad.' : 'Estamos preparando las publicaciones de AM Propiedades en Bahía Blanca.'}</div>`;
     attachCardInteractions();
     grid.querySelectorAll('.property-card').forEach(card => {
-      const button = [...card.querySelectorAll('a')].find(link => link.textContent.includes('WhatsApp'));
+      const button = card.querySelector('.am-card-wa');
       if (!button) return;
       const title = card.querySelector('h3')?.textContent.trim();
       button.href = whatsappUrl(title ? `Hola Alejandro, Me interesa recibir mas informacion de ${title}.` : whatsappMessage);
@@ -361,7 +424,7 @@
   const whatsappMessage = 'Hola Alejandro, Me interesa recibir mas informacion de...';
   const whatsappUrl = (message = whatsappMessage) => `https://wa.me/542914483222?text=${encodeURIComponent(message)}`;
   document.querySelectorAll('.property-card a').forEach(link => {
-    if (!link.textContent.includes('WhatsApp')) return;
+    if (!link.classList.contains('am-card-wa')) return;
     const title = link.closest('.property-card')?.querySelector('h3')?.textContent.trim();
     link.href = whatsappUrl(title ? `Hola Alejandro, Me interesa recibir mas informacion de ${title}.` : whatsappMessage);
     link.target = '_blank'; link.rel = 'noopener noreferrer';
@@ -414,91 +477,151 @@
   }
 
   function propertyFromTemplate(id, title, price, description, images, sourceHtml, property = {}) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(sourceHtml || cardTemplate || '<article class="property-card"><div class="carousel-container"></div><div><div class="font-price-card"></div><h3></h3><p class="mt-1"></p></div></article>', 'text/html');
-    const card = doc.querySelector('.property-card');
+    const card = document.createElement('article');
+    card.className = 'property-card';
     card.dataset.propertyId = id;
-    const heading = card.querySelector('h3'); if (heading) heading.textContent = title;
-    const priceNode = card.querySelector('.font-price-card'); if (priceNode) priceNode.textContent = price;
-    const descriptionNode = card.querySelector('.mt-1'); if (descriptionNode) descriptionNode.textContent = description;
-    const cityNode = heading?.parentElement?.querySelector('.text-primary');
-    if (cityNode) cityNode.textContent = [property.neighborhood, property.city].filter(Boolean).join(', ');
-    const branchNode = [...card.querySelectorAll('span')].find(node => node.textContent.trim().startsWith('Sucursal'));
-    if (branchNode) branchNode.parentElement?.remove();
-    const cardBody = card.querySelector('.p-4');
-    const cardMain = cardBody?.firstElementChild;
-    const financialBlock = cardMain ? [...cardMain.children].find(child => child.classList.contains('mb-2.5')) : null;
-    const specsBlock = cardMain?.querySelector('.flex.items-center.gap-3.py-2.my-2');
-    const addressBlock = heading?.parentElement;
-    if (cardMain && addressBlock) {
-      cardMain.insertBefore(addressBlock, cardMain.firstElementChild);
-      if (specsBlock) cardMain.append(specsBlock);
-      if (financialBlock) cardMain.append(financialBlock);
-    }
-    const isTerrain = String(property.type || '').toLowerCase().includes('terreno');
-    const bathroomItem = card.querySelector('[title="Ambientes"]');
-    if (bathroomItem) {
-      bathroomItem.title = 'Baños';
-      bathroomItem.querySelector('.material-symbols-outlined').textContent = 'bathroom';
-    }
-    const specs = {
-      'Superficie total': property.area ? `${property.area} m²` : '',
-      Baños: isTerrain || !property.bathrooms ? '' : `${property.bathrooms}`,
-      Dormitorios: isTerrain || !property.bedrooms ? '' : `${property.bedrooms}`,
-      Cocheras: isTerrain || !property.parkingSpots ? '' : `${property.parkingSpots}`
-    };
-    Object.entries(specs).forEach(([label, value]) => {
-      const item = card.querySelector(`[title="${label}"]`);
-      if (!item) return;
-      const text = item.querySelector('span:last-child');
-      if (text && value) text.textContent = value;
-      if (!value) item.remove();
+
+    const media = document.createElement('div');
+    media.className = 'am-card-media';
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel-container';
+    const photos = images.length ? images : ['https://placehold.co/900x675/E9E7E4/695B53?text=Sin+foto'];
+    photos.forEach((src, index) => {
+      const image = document.createElement('img');
+      image.className = `carousel-img${index === 0 ? ' active' : ' hidden'}`;
+      image.src = src;
+      image.alt = title;
+      image.loading = 'lazy';
+      carousel.append(image);
     });
-    const imageContainer = card.querySelector('.carousel-container');
-    if (imageContainer && images.length) {
-      const original = imageContainer.querySelector('.carousel-img');
-      imageContainer.querySelectorAll('.carousel-img').forEach((image, index) => { if (index > 0) image.remove(); });
-      const first = imageContainer.querySelector('.carousel-img');
-      if (first) {
-        first.src = images[0]; first.classList.remove('hidden'); first.classList.add('active');
-        images.slice(1).forEach((src, index) => {
-          const extra = original.cloneNode(true); extra.src = src; extra.classList.remove('active'); extra.classList.add('hidden'); imageContainer.append(extra);
-        });
-      }
-      const counter = card.querySelector('.carousel-counter'); if (counter) counter.textContent = `1/${images.length}`;
-    } else if (imageContainer) {
-      imageContainer.querySelectorAll('.carousel-img').forEach((image, index) => { if (index > 0) image.remove(); });
-      const image = imageContainer.querySelector('.carousel-img');
-      if (image) image.src = 'https://placehold.co/900x560/E9E7E4/695B53?text=Sin+foto';
-      const counter = card.querySelector('.carousel-counter'); if (counter) counter.textContent = '1/1';
+    media.append(carousel);
+
+    if (photos.length > 1) {
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'btn-prev am-card-arrow';
+      prev.setAttribute('aria-label', 'Foto anterior');
+      prev.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'btn-next am-card-arrow';
+      next.setAttribute('aria-label', 'Foto siguiente');
+      next.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>';
+      media.append(prev, next);
+      const counter = document.createElement('div');
+      counter.className = 'am-card-photos';
+      counter.innerHTML = '<span class="material-symbols-outlined">photo_camera</span>';
+      const counterText = document.createElement('span');
+      counterText.className = 'carousel-counter';
+      counterText.textContent = `1/${photos.length}`;
+      counter.append(counterText);
+      media.append(counter);
     }
-    card.querySelector('.am-sold-mark')?.remove();
+
+    const badges = document.createElement('div');
+    badges.className = 'am-card-badges';
     if (property.sold) {
-      const mark = document.createElement('div');
-      mark.className = 'am-sold-mark';
-      mark.innerHTML = '<span>VENDIDA</span>';
-      card.querySelector('.relative.w-full')?.append(mark);
+      const sold = document.createElement('span');
+      sold.className = 'am-badge am-badge-sold';
+      sold.textContent = 'VENDIDA';
+      badges.append(sold);
     }
-    card.querySelector('.am-finance-badge')?.remove();
     const financeLabels = [];
     const creditValue = String(property.aptaCredito ?? '').trim().toUpperCase();
     if (property.aptaCredito === true || ['SI', 'SÍ', 'YES', 'TRUE', 'APTA', 'APTO'].includes(creditValue)) financeLabels.push('Apto crédito');
     const financingValue = String(property.financing || '').trim().toUpperCase();
     if (financingValue && !['NO', 'NO SE FINANCIA'].includes(financingValue)) financeLabels.push('Se financia');
     if (financeLabels.length) {
-      const financeBadge = document.createElement('div');
-      financeBadge.className = 'am-finance-badge';
+      const financeBadge = document.createElement('span');
+      financeBadge.className = 'am-badge am-badge-finance';
       financeBadge.textContent = financeLabels.join(' · ');
-      card.querySelector('.relative.w-full')?.append(financeBadge);
+      badges.append(financeBadge);
     }
+    if (badges.children.length) media.append(badges);
+
+    const body = document.createElement('div');
+    body.className = 'am-card-body';
+
+    const head = document.createElement('div');
+    head.className = 'am-card-head';
+    const priceNode = document.createElement('div');
+    priceNode.className = 'font-price-card am-card-price';
+    priceNode.textContent = price;
+    head.append(priceNode);
+    if (property.operation) {
+      const tag = document.createElement('span');
+      tag.className = 'am-card-tag';
+      tag.textContent = property.operation;
+      head.append(tag);
+    }
+    body.append(head);
+
+    const heading = document.createElement('h3');
+    heading.className = 'am-card-title';
+    heading.textContent = title;
+    heading.title = title;
+    body.append(heading);
+
+    const place = [property.neighborhood, property.city].filter(Boolean).join(', ');
+    if (place) {
+      const location = document.createElement('p');
+      location.className = 'am-card-location';
+      location.innerHTML = '<span class="material-symbols-outlined">location_on</span>';
+      const locationText = document.createElement('span');
+      locationText.textContent = place;
+      location.append(locationText);
+      body.append(location);
+    }
+
+    if (description) {
+      const descriptionNode = document.createElement('p');
+      descriptionNode.className = 'am-card-desc';
+      descriptionNode.textContent = description;
+      body.append(descriptionNode);
+    }
+
+    const specs = [
+      property.area ? { icon: 'straighten', text: `${property.area} m²` } : null,
+      property.bedrooms ? { icon: 'bed', text: `${property.bedrooms} dorm.` } : null,
+      property.bathrooms ? { icon: 'bathroom', text: `${property.bathrooms} baños` } : null,
+      property.parkingSpots ? { icon: 'directions_car', text: `${property.parkingSpots} coch.` } : null
+    ].filter(Boolean);
+    if (specs.length) {
+      const specsRow = document.createElement('div');
+      specsRow.className = 'am-card-specs';
+      specs.forEach(spec => {
+        const chip = document.createElement('span');
+        chip.className = 'am-card-spec';
+        chip.innerHTML = `<span class="material-symbols-outlined">${spec.icon}</span>`;
+        const chipText = document.createElement('span');
+        chipText.textContent = spec.text;
+        chip.append(chipText);
+        specsRow.append(chip);
+      });
+      body.append(specsRow);
+    }
+
+    const footer = document.createElement('div');
+    footer.className = 'am-card-footer';
+    const whatsapp = document.createElement('a');
+    whatsapp.className = 'am-card-wa';
+    whatsapp.href = '#';
+    whatsapp.innerHTML = '<span class="material-symbols-outlined">chat</span>Contactar';
+    const detail = document.createElement('button');
+    detail.type = 'button';
+    detail.className = 'am-card-detail';
+    detail.textContent = 'Ver detalle';
+    footer.append(whatsapp, detail);
     if (session?.role === 'admin') {
-      const editButton = document.createElement('button');
-      editButton.className = 'am-button am-secondary am-small am-card-edit';
-      editButton.type = 'button';
-      editButton.textContent = 'Editar propiedad';
-      editButton.dataset.editCard = id;
-      card.querySelector('.p-4')?.append(editButton);
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'am-button am-secondary am-small am-card-edit';
+      edit.textContent = 'Editar';
+      edit.dataset.editCard = id;
+      footer.append(edit);
     }
+
+    card.append(media, body, footer);
     return card.outerHTML;
   }
 
