@@ -399,10 +399,9 @@
   }
 
   function updateHeader() {
-    const avatar = '<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0" aria-label="Cuenta"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>';
     headerActions.innerHTML = session
-      ? `${session.role === 'admin' ? '<button class="am-button am-secondary am-small" type="button" data-admin-panel>Panel admin</button><a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-all" data-publish-property href="#">Publicar propiedad</a>' : ''}<span class="font-specs-label text-secondary hidden sm:inline">${esc(session.name)}</span><button class="am-button am-primary am-small" type="button" data-logout>Salir</button>${avatar}`
-      : `<a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all" data-path="ingreso" href="#">Ingresar</a>${avatar}`;
+      ? `${session.role === 'admin' ? '<button class="am-button am-secondary am-small" type="button" data-admin-panel>Panel admin</button><a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-all" data-publish-property href="#">Publicar propiedad</a>' : ''}<span class="font-specs-label text-secondary hidden sm:inline">${esc(session.name)}</span><button class="am-button am-primary am-small" type="button" data-logout>Salir</button>`
+      : `<a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all" data-path="ingreso" href="#">Ingresar</a>`;
     if (!session) {
       headerActions.querySelector('[data-path="ingreso"]')?.addEventListener('click', event => { event.preventDefault(); openLogin(); });
     }
