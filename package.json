@@ -1,0 +1,13 @@
+{
+  "name": "ampropiedades-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend local para el portal AM Propiedades",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^6.17.0"
+  }
+}
