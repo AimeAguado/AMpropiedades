@@ -85,6 +85,7 @@
     return properties;
   }
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  const sizedImage = (url, width) => url.startsWith('/api/media/') ? `${url}?w=${width}` : url;
   const modal = document.createElement('div');
   modal.className = 'am-overlay';
   modal.innerHTML = '<section class="am-dialog" role="dialog" aria-modal="true" aria-labelledby="am-dialog-title"><button class="am-close" type="button" aria-label="Cerrar">×</button><div class="am-content"></div></section>';
@@ -190,20 +191,22 @@
 
   function openPropertyDetail(property) {
     const images = property.images?.length ? property.images : ['https://placehold.co/1200x760/E9E7E4/695B53?text=Sin+foto'];
+    const detailImages = images.map(src => sizedImage(src, 1200));
+    const thumbImages = images.map(src => sizedImage(src, 400));
     let current = 0;
     const message = `Hola Alejandro, Me interesa recibir mas informacion de ${property.title}.`;
-    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p><div class="am-detail-actions"><a class="am-contact" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">Contactar</a></div></div><div class="am-detail-main"><button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(images[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(image)}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
+    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p><div class="am-detail-actions"><a class="am-contact" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">Contactar</a></div></div><div class="am-detail-main"><button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(detailImages[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(thumbImages[index])}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
     const image = content.querySelector('#am-detail-image');
     const thumbs = [...content.querySelectorAll('[data-photo-index]')];
     const showPhoto = index => {
       current = (index + images.length) % images.length;
-      image.src = images[current];
+      image.src = detailImages[current];
       thumbs.forEach((thumb, thumbIndex) => thumb.classList.toggle('active', thumbIndex === current));
     };
     content.querySelector('.prev').addEventListener('click', () => showPhoto(current - 1));
     content.querySelector('.next').addEventListener('click', () => showPhoto(current + 1));
     thumbs.forEach(thumb => thumb.addEventListener('click', () => showPhoto(Number(thumb.dataset.photoIndex))));
-    image.addEventListener('click', () => openLightbox(images, current));
+    image.addEventListener('click', () => openLightbox(images.map(src => sizedImage(src, 1600)), current));
   }
 
   function attachCardInteractions() {
@@ -489,7 +492,7 @@
     photos.forEach((src, index) => {
       const image = document.createElement('img');
       image.className = `carousel-img${index === 0 ? ' active' : ' hidden'}`;
-      image.src = src;
+      image.src = sizedImage(src, 800);
       image.alt = title;
       image.loading = 'lazy';
       carousel.append(image);

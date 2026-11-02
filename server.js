@@ -75,10 +75,17 @@ async function api(req, res, url) {
   }
   const mediaId = pathname.match(/^\/api\/media\/([^/]+)$/)?.[1];
   if (req.method === 'GET' && mediaId) {
-    const response = await fetch(`https://drive.google.com/uc?export=download&id=${encodeURIComponent(mediaId)}`);
+    const width = Math.min(2400, Math.max(200, Number(searchParams.get('w')) || 1600));
+    const source = `https://lh3.googleusercontent.com/d/${encodeURIComponent(mediaId)}=w${width}`;
+    let response = await fetch(source);
+    if (!response.ok) response = await fetch(`https://drive.google.com/thumbnail?id=${encodeURIComponent(mediaId)}&sz=w${width}`);
     if (!response.ok) { res.writeHead(response.status); res.end(); return; }
     const contentType = response.headers.get('content-type') || 'image/jpeg';
-    res.writeHead(200, { 'Content-Type': contentType, 'Cache-Control': 'public, max-age=3600' });
+    res.writeHead(200, {
+      'Content-Type': contentType,
+      'Cache-Control': 'public, max-age=31536000, immutable, s-maxage=31536000, stale-while-revalidate=86400',
+      'Vercel-CDN-Cache-Control': 's-maxage=31536000, stale-while-revalidate=86400'
+    });
     res.end(Buffer.from(await response.arrayBuffer()));
     return;
   }
