@@ -4,3 +4,5 @@ npm-debug.log*
 server.log
 server-runtime.log
 screen.png
+
+.vercel
