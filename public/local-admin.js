@@ -6,12 +6,6 @@
     const industrialLink = footer.querySelector('a[data-path="propiedades-en-alquiler"]');
     if (saleLink) saleLink.textContent = 'Propiedades en Venta';
     if (industrialLink) industrialLink.textContent = 'Alquileres industriales';
-    footer.querySelectorAll('p').forEach(paragraph => {
-      if (paragraph.textContent.includes('5859 CABA')) paragraph.textContent = 'Cumplimiento de la Ley 10.973 de la Provincia de Buenos Aires y normativas de corretaje inmobiliario vigentes.';
-    });
-    footer.querySelectorAll('span').forEach(span => {
-      if (span.textContent.includes('Colegio Único de Corredores Inmobiliarios de la CABA')) span.remove();
-    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyFooterText, { once: true });
   else applyFooterText();
@@ -64,7 +58,7 @@
   };
   let users = [];
   let properties = [];
-  let activeOperation = 'Venta';
+  let activeOperation = '';
   let saleLandingOrder = false;
   let financeLanding = false;
   const filters = { text: '', city: '', type: '', price: '', bedrooms: '' };
@@ -248,7 +242,6 @@
   }
 
   function renderProperties() {
-    const sort = document.getElementById('sortSelect')?.value || 'relevancia';
     const visible = properties.filter(property => {
       if (!property.published) return false;
       if (!financeLanding && activeOperation && property.operation !== activeOperation) return false;
@@ -257,7 +250,7 @@
       const financingValue = String(property.financing || '').trim().toUpperCase();
       const hasFinancing = financingValue && !['NO', 'NO SE FINANCIA'].includes(financingValue);
       if (financeLanding && !hasCredit && !hasFinancing) return false;
-      if (!financeLanding && sort === 'relevancia' && !saleLandingOrder && !property.featured) return false;
+      if (!financeLanding && !saleLandingOrder && !property.featured) return false;
       if (filters.city && property.city !== filters.city) return false;
       if (filters.text && ![property.title, property.city, property.neighborhood, property.type].join(' ').toLowerCase().includes(filters.text)) return false;
       if (filters.type && property.type !== filters.type) return false;
@@ -271,9 +264,6 @@
       return true;
     });
     visible.sort((a, b) => {
-      if (sort === 'menor_precio') return (a.priceValue || 0) - (b.priceValue || 0);
-      if (sort === 'mayor_precio') return (b.priceValue || 0) - (a.priceValue || 0);
-      if (sort === 'recientes') return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
       if (saleLandingOrder) {
         const cityKey = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
         const aBahia = cityKey(a.city) === 'bahia blanca' ? 0 : 1;
@@ -282,7 +272,7 @@
       }
       return 0;
     });
-    const showFeaturedCarousel = sort === 'relevancia' && !saleLandingOrder && !financeLanding;
+    const showFeaturedCarousel = !saleLandingOrder && !financeLanding;
     grid.classList.toggle('am-featured-track', showFeaturedCarousel);
     const host = grid.parentElement;
     host?.querySelector('.am-carousel-controls')?.remove();
@@ -296,7 +286,7 @@
     }
     grid.innerHTML = visible.length
       ? visible.map(property => propertyFromTemplate(property.id, property.title, property.price, property.description, property.images || [], cardTemplate, property)).join('')
-      : `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary"><strong class="block text-on-surface text-lg mb-2">${sort === 'relevancia' ? 'No hay propiedades destacadas todavía' : 'Próximamente, nuevas propiedades'}</strong>${sort === 'relevancia' ? 'El administrador puede elegirlas desde Editar propiedad.' : 'Estamos preparando las publicaciones de AM Propiedades en Bahía Blanca.'}</div>`;
+      : `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary"><strong class="block text-on-surface text-lg mb-2">${saleLandingOrder ? 'No encontramos propiedades con esos filtros' : 'No hay propiedades destacadas todavía'}</strong>${saleLandingOrder ? 'Probá modificar los filtros o consultanos para ayudarte a encontrar una propiedad.' : 'El administrador puede elegirlas desde Editar propiedad.'}</div>`;
     attachCardInteractions();
     grid.querySelectorAll('.property-card').forEach(card => {
       const button = card.querySelector('.am-card-wa');
@@ -319,8 +309,9 @@
   const priceSelect = document.getElementById('priceSelect');
   const roomsSelect = document.getElementById('roomsSelect');
   const searchButton = document.getElementById('btnExecuteSearch');
-  const valuationButton = [...document.querySelectorAll('a, button')].find(button => button.textContent.trim().toLowerCase().includes('solicitar tasación gratis'));
-  valuationButton?.addEventListener('click', event => { event.preventDefault(); openValuationModal(); });
+  document.querySelectorAll('[data-valuation]').forEach(button => {
+    button.addEventListener('click', event => { event.preventDefault(); openValuationModal(); });
+  });
   function resetSearchFilters() {
     filters.text = '';
     filters.city = '';
@@ -358,7 +349,7 @@
   }));
   searchButton?.addEventListener('click', event => {
     event.preventDefault();
-    saleLandingOrder = false;
+    saleLandingOrder = true;
     financeLanding = false;
     filters.text = searchInput?.value.trim().toLowerCase() || '';
     filters.city = citySelect?.value || '';
@@ -368,7 +359,6 @@
     renderProperties();
     document.getElementById('propertyCardsGrid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  document.getElementById('sortSelect')?.addEventListener('change', () => { saleLandingOrder = false; renderProperties(); });
   document.querySelectorAll('nav a[data-path]').forEach(link => link.addEventListener('click', event => {
     const path = link.dataset.path;
     if (path === 'inicio') {
@@ -414,7 +404,7 @@
     const commercial = footerColumns.find(column => column.querySelector('h4')?.textContent.trim() === 'Atención Comercial');
     const details = [...(commercial?.querySelectorAll('li') || [])];
     if (details[0]) details[0].innerHTML = '<strong class="text-on-surface">Dirección:</strong> Avenida Alem 995, Bahía Blanca';
-    if (details[1]) details[1].innerHTML = '<strong class="text-on-surface">Teléfono:</strong> <a class="am-contact-link" href="tel:+542914483222">+54 291 4483 222</a>';
+    if (details[1]) details[1].innerHTML = '<strong class="text-on-surface">Teléfono:</strong> <a class="am-contact-link" href="tel:+542914483222">+54 291 448 3222</a>';
     details[2]?.remove();
     if (details[3]) details[3].innerHTML = '<strong class="text-on-surface">Horarios:</strong> Lun a Vie: 9 a 16 hs';
     const footerCopy = footerColumns[0]?.querySelector('p');
@@ -466,8 +456,8 @@
 
   function updateHeader() {
     headerActions.innerHTML = session
-      ? `${session.role === 'admin' ? '<button class="am-button am-secondary am-small" type="button" data-admin-panel>Panel admin</button><a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-all" data-publish-property href="#">Publicar propiedad</a>' : ''}<span class="font-specs-label text-secondary hidden sm:inline">${esc(session.name)}</span><button class="am-button am-primary am-small" type="button" data-logout>Salir</button>`
-      : `<a class="inline-flex items-center justify-center font-label-btn text-label-btn px-space-md py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all" data-path="ingreso" href="#">Ingresar</a>`;
+      ? `${session.role === 'admin' ? '<button class="am-button am-secondary am-small" type="button" data-admin-panel>Panel admin</button><a class="am-header-publish" data-publish-property href="#">Publicar propiedad</a>' : ''}<span class="font-specs-label text-secondary hidden sm:inline">${esc(session.name)}</span><button class="am-button am-primary am-small" type="button" data-logout>Salir</button>`
+      : `<a class="am-header-login" data-path="ingreso" href="#">Ingresar</a>`;
     if (!session) {
       headerActions.querySelector('[data-path="ingreso"]')?.addEventListener('click', event => { event.preventDefault(); openLogin(); });
     }
@@ -495,6 +485,7 @@
       image.src = sizedImage(src, 800);
       image.alt = title;
       image.loading = 'lazy';
+      image.decoding = 'async';
       carousel.append(image);
     });
     media.append(carousel);
@@ -559,6 +550,13 @@
     }
     body.append(head);
 
+    if (property.type) {
+      const propertyType = document.createElement('span');
+      propertyType.className = 'am-card-type';
+      propertyType.textContent = property.type;
+      body.append(propertyType);
+    }
+
     const heading = document.createElement('h3');
     heading.className = 'am-card-title';
     heading.textContent = title;
@@ -583,7 +581,9 @@
       body.append(descriptionNode);
     }
 
+    const roomCount = property.ambiences ?? property.ambientes ?? property.rooms;
     const specs = [
+      roomCount ? { icon: 'meeting_room', text: `${roomCount} amb.` } : null,
       property.area ? { icon: 'straighten', text: `${property.area} m²` } : null,
       property.bedrooms ? { icon: 'bed', text: `${property.bedrooms} dorm.` } : null,
       property.bathrooms ? { icon: 'bathroom', text: `${property.bathrooms} baños` } : null,
@@ -654,7 +654,7 @@
     content.querySelector('.am-actions').before(financingField);
     const featuredField = document.createElement('label');
     featuredField.className = 'am-toggle-field';
-    featuredField.innerHTML = `<input class="am-toggle" id="am-property-featured" type="checkbox" ${property?.featured ? 'checked' : ''}><span>Mostrar en inicio (Relevancia)</span>`;
+    featuredField.innerHTML = `<input class="am-toggle" id="am-property-featured" type="checkbox" ${property?.featured ? 'checked' : ''}><span>Destacar en inicio</span>`;
     content.querySelector('.am-actions').before(featuredField);
     content.querySelector('[data-close]').addEventListener('click', closeModal);
     content.querySelector('#am-property-form').addEventListener('submit', async event => {
