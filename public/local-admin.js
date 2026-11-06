@@ -22,7 +22,7 @@
     .am-dialog.am-wide{width:min(100%,900px)}.am-title{font:700 24px/1.25 'Plus Jakarta Sans',sans-serif;margin:0 0 6px}.am-muted{color:#62666a;font-size:14px;margin:0 0 20px}
     .am-field{display:grid;gap:6px;margin:14px 0}.am-field label{font-weight:600;font-size:13px}.am-field input,.am-field textarea,.am-field select{width:100%;box-sizing:border-box;border:1px solid #d8dadd;border-radius:9px;padding:11px 12px;font:inherit;background:#fff}.am-field textarea{min-height:100px;resize:vertical}
     .am-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:20px;flex-wrap:wrap}.am-button{border:0;border-radius:9px;padding:11px 16px;font:600 14px 'Inter',sans-serif;cursor:pointer;background:#191c1d;color:white}.am-button.am-secondary{background:#f0f1f2;color:#191c1d}.am-button.am-primary{background:#9d3e00;color:#fff}.am-close{float:right;border:0;background:#f1f2f3;border-radius:50%;height:34px;width:34px;font-size:20px;cursor:pointer}
-    .am-error{color:#b42318;font-size:13px;min-height:18px}.am-admin-row,.am-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.am-admin-row strong,.am-user-row strong{display:block}.am-inline-actions{display:flex;gap:8px;flex-wrap:wrap}.am-small{padding:8px 11px;font-size:12px}.am-hidden{display:none!important}.am-drop{border:1px dashed #b9bdc1;border-radius:9px;padding:13px;color:#62666a;font-size:13px}.am-contact-link{color:inherit;text-decoration:none}
+    .am-error{color:#b42318;font-size:13px;min-height:18px}.am-admin-row,.am-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.am-admin-row strong,.am-user-row strong{display:block}.am-inline-actions{display:flex;gap:8px;flex-wrap:wrap}.am-small{padding:8px 11px;font-size:12px}.am-hidden{display:none!important}.am-drop{border:1px dashed #b9bdc1;border-radius:9px;padding:13px;color:#62666a;font-size:13px}.am-contact-link{color:inherit;text-decoration:none}.am-property-delete{margin-right:auto;color:#873d31!important;background:#fbefec!important}
     .am-whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:70;display:flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:#20b858;color:#fff;text-decoration:none;font:700 15px 'Inter',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .18s,background .18s}.am-whatsapp-float:hover{background:#159447;transform:translateY(-2px)}.am-whatsapp-float svg{width:25px;height:25px;flex:none}
     .am-sold-mark{position:absolute;inset:0;z-index:15;display:grid;place-items:center;pointer-events:none}.am-sold-mark::before{content:"";position:absolute;width:125%;height:8px;background:#d71920;transform:rotate(-24deg);box-shadow:0 1px 3px #0006}.am-sold-mark span{position:relative;padding:8px 18px;background:#d71920;color:#fff;font:800 16px 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;transform:rotate(-8deg);box-shadow:0 2px 8px #0005}
     .am-photo-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}.am-photo-item{position:relative;border:1px solid #ddd;border-radius:9px;overflow:hidden;background:#f5f5f5}.am-photo-item img{display:block;width:100%;height:78px;object-fit:cover}.am-photo-item label{display:flex;align-items:center;gap:5px;padding:6px;font-size:11px}.am-photo-item input{width:auto}
@@ -40,6 +40,8 @@
     .am-cards-grid{align-items:stretch;gap:24px}.property-card{display:flex;flex-direction:column;height:100%;min-height:100%;border:1px solid #eee6df;border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(56,39,31,.045);transition:transform .22s ease,box-shadow .22s ease}.property-card:hover{transform:translateY(-3px);box-shadow:0 9px 24px rgba(56,39,31,.09)}.am-card-media{height:auto;aspect-ratio:4/3;flex:none;border-radius:13px 13px 0 0;background:#eee7df}.carousel-img{object-fit:cover}.property-card:hover .carousel-img.active{transform:scale(1.025)}.am-card-operation{position:absolute;z-index:2;top:14px;left:14px;padding:7px 11px;border-radius:5px;background:var(--am-orange);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.am-card-badges{top:51px;left:14px;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:6px}.am-card-badges .am-badge{padding:6px 9px;border:1px solid rgba(56,39,31,.08);border-radius:5px;background:rgba(255,255,255,.96);color:#70462f;font-size:9px;font-weight:800;letter-spacing:.03em;box-shadow:0 2px 8px rgba(40,28,20,.1)}.am-card-badges .am-badge-sold{background:#59463b;color:#fff}.am-card-body{display:flex;flex:1;flex-direction:column;padding:18px 19px 12px}.am-card-title{margin:9px 0 5px;font-size:16px;line-height:1.35}.am-card-type{color:#8c7160;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.am-card-location{font-size:12px}.am-card-specs{gap:14px;margin-top:auto;padding-top:14px}.am-card-spec{font-size:11px}.am-card-footer{align-items:center;margin-top:auto;padding:0 19px 18px}.am-card-footer .am-card-wa{display:none}.am-card-footer .am-card-price{flex:0 1 auto;margin-right:auto;color:var(--am-brown);font:800 19px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:-.03em;white-space:nowrap}.am-card-footer .am-card-detail{flex:0 0 auto;min-width:120px;min-height:38px;padding:0 15px;border-color:#e6d8cc;color:#714633;transition:background .18s ease,border-color .18s ease}.am-card-footer .am-card-detail:hover{border-color:var(--am-orange);background:#fff6ef;color:#b94c17}
     @media(max-width:760px){.am-cards-grid{gap:16px}.am-card-media{height:auto;aspect-ratio:4/3}.am-card-body{padding:15px 15px 11px}.am-card-footer{padding:0 15px 15px}}
     @media(max-width:520px){.am-cards-grid{grid-template-columns:1fr}.property-card{max-width:440px;width:100%;margin-inline:auto}.am-card-media{aspect-ratio:4/3}}
+    .am-card-sold-seal{position:absolute;top:14px;right:14px;z-index:4;display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid rgba(255,255,255,.28);border-left:4px solid var(--am-orange);border-radius:6px;background:rgba(56,39,31,.96);color:#fff;font:800 11px/1 'Inter',sans-serif;letter-spacing:.13em;box-shadow:0 4px 12px rgba(35,24,18,.22)}.am-card-sold-seal::before{content:"";width:6px;height:6px;flex:none;border-radius:50%;background:var(--am-orange)}
+    @media(max-width:520px){.am-card-sold-seal{top:10px;right:10px;padding:9px 12px;font-size:10px}}
     @media(max-width:820px){.am-detail-gallery{grid-template-columns:1fr}.am-detail-main{grid-column:1;grid-row:1}.am-detail-thumbs{grid-column:1;grid-row:2}.am-detail-info{grid-column:1;grid-row:3;max-height:none;overflow:visible;padding-right:0}.am-detail-actions{position:static}}@media(max-width:600px){.am-dialog{padding:20px}.am-title{font-size:21px}.am-admin-row{align-items:flex-start;flex-direction:column}}
   `;
   document.head.append(style);
@@ -192,8 +194,8 @@
     const detailImages = images.map(src => sizedImage(src, 1200));
     const thumbImages = images.map(src => sizedImage(src, 400));
     let current = 0;
-    const message = `Hola Alejandro, Me interesa recibir mas informacion de ${property.title}.`;
-    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p><div class="am-detail-actions"><a class="am-contact" href="${esc(whatsappUrl(message))}" target="_blank" rel="noopener noreferrer">Contactar</a></div></div><div class="am-detail-main"><button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(detailImages[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(thumbImages[index])}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
+    const detailContact = property.sold ? '' : `<div class="am-detail-actions"><a class="am-contact" href="${esc(whatsappUrl(`Hola Alejandro, Me interesa recibir mas informacion de ${property.title}.`))}" target="_blank" rel="noopener noreferrer">Contactar</a></div>`;
+    openModal(`<div class="am-detail-gallery"><div class="am-detail-info"><h2 id="am-dialog-title">${esc(property.title)}</h2><div class="am-detail-city">${esc([property.neighborhood, property.city].filter(Boolean).join(', '))}</div><div class="am-detail-price">${esc(property.price)}</div><p class="am-detail-description"><strong>Descripción</strong><br>${esc(property.description || 'Sin descripción cargada.')}</p>${detailContact}</div><div class="am-detail-main">${property.sold ? '<span class="am-card-sold-seal" role="status">VENDIDA</span>' : ''}<button class="am-detail-arrow prev" type="button" aria-label="Foto anterior">‹</button><img id="am-detail-image" src="${esc(detailImages[0])}" alt="${esc(property.title)}"><button class="am-detail-arrow next" type="button" aria-label="Foto siguiente">›</button></div><div class="am-detail-thumbs">${images.map((image, index) => `<button class="am-detail-thumb${index === 0 ? ' active' : ''}" data-photo-index="${index}" type="button"><img src="${esc(thumbImages[index])}" alt="Foto ${index + 1}"></button>`).join('')}</div></div>`, true);
     const image = content.querySelector('#am-detail-image');
     const thumbs = [...content.querySelectorAll('[data-photo-index]')];
     const showPhoto = index => {
@@ -622,17 +624,16 @@
 
     const badges = document.createElement('div');
     badges.className = 'am-card-badges';
-    if (property.operation) {
+    if (property.sold) {
+      const soldSeal = document.createElement('span');
+      soldSeal.className = 'am-card-sold-seal';
+      soldSeal.textContent = 'VENDIDA';
+      media.append(soldSeal);
+    } else if (property.operation) {
       const operation = document.createElement('span');
       operation.className = 'am-card-operation';
       operation.textContent = property.operation;
       media.append(operation);
-    }
-    if (property.sold) {
-      const sold = document.createElement('span');
-      sold.className = 'am-badge am-badge-sold';
-      sold.textContent = 'VENDIDA';
-      badges.append(sold);
     }
     const financeLabels = [];
     const creditValue = String(property.aptaCredito ?? '').trim().toUpperCase();
@@ -712,15 +713,18 @@
 
     const footer = document.createElement('div');
     footer.className = 'am-card-footer';
-    const whatsapp = document.createElement('a');
-    whatsapp.className = 'am-card-wa';
-    whatsapp.href = '#';
-    whatsapp.innerHTML = '<span class="material-symbols-outlined">chat</span>Contactar';
+    const whatsapp = property.sold ? null : document.createElement('a');
+    if (whatsapp) {
+      whatsapp.className = 'am-card-wa';
+      whatsapp.href = '#';
+      whatsapp.innerHTML = '<span class="material-symbols-outlined">chat</span>Contactar';
+    }
     const detail = document.createElement('button');
     detail.type = 'button';
     detail.className = 'am-card-detail';
     detail.textContent = 'Ver propiedad';
-    footer.append(whatsapp, priceNode, detail);
+    if (whatsapp) footer.append(whatsapp);
+    footer.append(priceNode, detail);
     if (session?.role === 'admin') {
       const edit = document.createElement('button');
       edit.type = 'button';
@@ -738,7 +742,7 @@
     if (session?.role !== 'admin') return;
     const editing = Boolean(property);
     const imagesPreview = property?.images?.length ? `<p class="am-muted">${property.images.length} foto(s) guardadas. Seleccioná nuevas para reemplazarlas.</p>` : '';
-    openModal(`<h2 class="am-title" id="am-dialog-title">${editing ? 'Editar propiedad' : 'Publicar propiedad'}</h2><p class="am-muted">Completá los datos visibles en la publicación.</p><form id="am-property-form"><div class="am-field"><label for="am-property-title">Título</label><input id="am-property-title" required maxlength="90" value="${esc(property?.title || '')}"></div><div class="am-field"><label for="am-property-price">Precio</label><input id="am-property-price" required maxlength="50" placeholder="USD 180.000" value="${esc(property?.price || '')}"></div><div class="am-field"><label for="am-property-description">Descripción</label><textarea id="am-property-description" required maxlength="500">${esc(property?.description || '')}</textarea></div><div class="am-field"><label for="am-property-images">Fotos (podés elegir varias)</label><input id="am-property-images" type="file" accept="image/*" multiple><div class="am-drop">Las imágenes se guardan en este navegador. ${imagesPreview}</div></div><p class="am-error" id="am-property-error" role="alert"></p><div class="am-actions"><button class="am-button am-secondary" type="button" data-close>Cancelar</button><button class="am-button am-primary" type="submit">${editing ? 'Guardar cambios' : 'Publicar'}</button></div></form>`);
+    openModal(`<h2 class="am-title" id="am-dialog-title">${editing ? 'Editar propiedad' : 'Publicar propiedad'}</h2><p class="am-muted">Completá los datos visibles en la publicación.</p><form id="am-property-form"><div class="am-field"><label for="am-property-title">Título</label><input id="am-property-title" required maxlength="90" value="${esc(property?.title || '')}"></div><div class="am-field"><label for="am-property-price">Precio</label><input id="am-property-price" required maxlength="50" placeholder="USD 180.000" value="${esc(property?.price || '')}"></div><div class="am-field"><label for="am-property-description">Descripción</label><textarea id="am-property-description" required maxlength="500">${esc(property?.description || '')}</textarea></div><div class="am-field"><label for="am-property-images">Fotos (podés elegir varias)</label><input id="am-property-images" type="file" accept="image/*" multiple><div class="am-drop">Las imágenes se guardan en este navegador. ${imagesPreview}</div></div><p class="am-error" id="am-property-error" role="alert"></p><div class="am-actions">${editing ? '<button class="am-button am-property-delete" type="button" data-delete-property>Eliminar propiedad</button>' : ''}<button class="am-button am-secondary" type="button" data-close>Cancelar</button><button class="am-button am-primary" type="submit">${editing ? 'Guardar cambios' : 'Publicar'}</button></div></form>`);
     content.querySelector('#am-property-description').required = false;
     const imageInput = content.querySelector('#am-property-images');
     const descriptionField = content.querySelector('#am-property-description').parentElement;
@@ -746,6 +750,10 @@
     if (property?.images?.length) {
       imageInput.insertAdjacentHTML('afterend', `<div class="am-photo-list">${property.images.map((image, index) => `<div class="am-photo-item"><img src="${esc(image)}" alt="Foto ${index + 1}"><label><input type="checkbox" data-existing-image value="${esc(image)}" checked> Conservar</label></div>`).join('')}</div>`);
     }
+    const publishedField = document.createElement('label');
+    publishedField.className = 'am-toggle-field';
+    publishedField.innerHTML = `<input class="am-toggle" id="am-property-published" type="checkbox" ${!editing || property?.published ? 'checked' : ''}><span>Mostrar en el listado</span>`;
+    content.querySelector('.am-actions').before(publishedField);
     const soldField = document.createElement('label');
     soldField.className = 'am-toggle-field';
     soldField.innerHTML = `<input class="am-toggle" id="am-property-sold" type="checkbox" ${property?.sold ? 'checked' : ''}><span>Marcar como vendida</span>`;
@@ -763,6 +771,21 @@
     featuredField.innerHTML = `<input class="am-toggle" id="am-property-featured" type="checkbox" ${property?.featured ? 'checked' : ''}><span>Destacar en inicio</span>`;
     content.querySelector('.am-actions').before(featuredField);
     content.querySelector('[data-close]').addEventListener('click', closeModal);
+    content.querySelector('[data-delete-property]')?.addEventListener('click', async event => {
+      if (!confirm(`¿Eliminar definitivamente “${property.title}”?`)) return;
+      const button = event.currentTarget;
+      button.disabled = true;
+      button.textContent = 'Eliminando…';
+      try {
+        await api(`/api/properties/${encodeURIComponent(property.id)}`, { method: 'DELETE' });
+        await refreshProperties();
+        await openAdmin();
+      } catch (error) {
+        content.querySelector('#am-property-error').textContent = error.message || 'No se pudo eliminar la propiedad.';
+        button.disabled = false;
+        button.textContent = 'Eliminar propiedad';
+      }
+    });
     content.querySelector('#am-property-form').addEventListener('submit', async event => {
       event.preventDefault();
       const submit = content.querySelector('button[type="submit"]'); submit.disabled = true; submit.textContent = 'Guardando…';
@@ -783,7 +806,7 @@
           bathrooms: content.querySelector('#am-property-bathrooms').value,
           parkingSpots: content.querySelector('#am-property-parking').value,
           images,
-          published: true,
+          published: content.querySelector('#am-property-published').checked,
           sold: content.querySelector('#am-property-sold').checked,
           aptaCredito: content.querySelector('#am-property-credit').checked,
           financing: content.querySelector('#am-property-financing').checked ? 'Se financia' : '',
@@ -823,9 +846,11 @@
     if (session?.role !== 'admin') return;
     try { users = await api('/api/users'); }
     catch (error) { openModal(`<h2 class="am-title" id="am-dialog-title">Panel de administración</h2><p class="am-error">${esc(error.message)}</p>`); return; }
-    const rows = properties.map(property => `<div class="am-admin-row"><div><strong>${esc(property.title)}</strong><span class="am-muted">${esc(property.price)} · ${property.sold ? 'Vendida' : (property.published ? 'Publicada' : 'Oculta')}</span></div><div class="am-inline-actions"><button class="am-button am-secondary am-small" data-edit="${esc(property.id)}" type="button">Editar</button><button class="am-button am-secondary am-small" data-sold="${esc(property.id)}" type="button">${property.sold ? 'Quitar vendida' : 'Marcar vendida'}</button><button class="am-button am-secondary am-small" data-toggle="${esc(property.id)}" type="button">${property.published ? 'Ocultar' : 'Publicar'}</button><button class="am-button am-secondary am-small" data-delete="${esc(property.id)}" type="button">Eliminar</button></div></div>`).join('');
+    const propertyRows = list => list.map(property => `<div class="am-admin-row"><div><strong>${esc(property.title)}</strong><span class="am-muted">${esc(property.price)} · ${property.sold ? 'Vendida' : (property.published ? 'Publicada' : 'Fuera del listado')}</span></div><div class="am-inline-actions"><button class="am-button am-secondary am-small" data-edit="${esc(property.id)}" type="button">Editar</button><button class="am-button am-secondary am-small" data-sold="${esc(property.id)}" type="button">${property.sold ? 'Quitar vendida' : 'Marcar vendida'}</button><button class="am-button am-secondary am-small" data-toggle="${esc(property.id)}" type="button">${property.published ? 'Desactivar' : 'Reactivar'}</button><button class="am-button am-secondary am-small" data-delete="${esc(property.id)}" type="button">Eliminar</button></div></div>`).join('');
+    const listedRows = propertyRows(properties.filter(property => property.published));
+    const inactiveRows = propertyRows(properties.filter(property => !property.published));
     const userRows = users.map(user => `<div class="am-user-row"><div><strong>${esc(user.name)}</strong><span class="am-muted">${esc(user.email)} · ${user.role === 'admin' ? 'Admin' : 'Usuario'}</span></div>${user.role !== 'admin' ? `<button class="am-button am-secondary am-small" data-remove-user="${esc(user.id)}" type="button">Quitar</button>` : ''}</div>`).join('');
-    openModal(`<h2 class="am-title" id="am-dialog-title">Panel de administración</h2><p class="am-muted">Gestioná las publicaciones y las cuentas de acceso.</p><div class="am-actions" style="justify-content:flex-start;margin:0 0 14px"><button class="am-button am-primary" data-new-property type="button">＋ Nueva propiedad</button><button class="am-button am-secondary" data-new-user type="button">＋ Crear usuario</button></div><h3>Propiedades</h3>${rows || '<p class="am-muted">Todavía no hay propiedades.</p>'}<h3 style="margin-top:24px">Usuarios</h3>${userRows}` , true);
+    openModal(`<h2 class="am-title" id="am-dialog-title">Panel de administración</h2><p class="am-muted">Gestioná las publicaciones y las cuentas de acceso.</p><div class="am-actions" style="justify-content:flex-start;margin:0 0 14px"><button class="am-button am-primary" data-new-property type="button">＋ Nueva propiedad</button><button class="am-button am-secondary" data-new-user type="button">＋ Crear usuario</button></div><h3>Propiedades en el listado</h3>${listedRows || '<p class="am-muted">No hay propiedades publicadas.</p>'}<h3 style="margin-top:24px">Fuera del listado</h3><p class="am-muted">Podés reactivar una propiedad si vuelve a estar disponible.</p>${inactiveRows || '<p class="am-muted">No hay propiedades desactivadas.</p>'}<h3 style="margin-top:24px">Usuarios</h3>${userRows}` , true);
     content.querySelector('[data-new-property]').addEventListener('click', () => openPropertyEditor());
     content.querySelectorAll('[data-edit]').forEach(button => button.addEventListener('click', () => openPropertyEditor(properties.find(item => item.id === button.dataset.edit))));
     content.querySelectorAll('[data-edit-card]').forEach(button => button.addEventListener('click', event => { event.stopPropagation(); openPropertyEditor(properties.find(item => item.id === button.dataset.editCard)); }));
