@@ -11,7 +11,7 @@
   else applyFooterText();
 
   const grid = document.getElementById('propertyCardsGrid');
-  const headerActions = document.querySelector('header > div > div:last-child');
+  const headerActions = document.querySelector('header .am-header-actions');
   if (!grid || !headerActions) return;
   const cardTemplate = grid.querySelector('.property-card')?.outerHTML || '';
 
@@ -36,7 +36,10 @@
     .am-lightbox-count{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:132;padding:7px 14px;border-radius:999px;background:#000000a6;color:#fff;font:600 13px 'Inter',sans-serif}.am-detail-actions a{display:inline-flex;flex:1;align-items:center;justify-content:center;padding:12px 16px;border-radius:9px;text-decoration:none;font:700 14px 'Inter',sans-serif}.am-detail-actions .am-contact{background:#191c1d;color:#fff}
     .am-toggle-field{display:flex;align-items:center;gap:10px;margin:18px 0;font-weight:600}.am-toggle{appearance:none;width:44px;height:24px;margin:0;border:0;border-radius:999px;background:#c8cbd0;position:relative;cursor:pointer;transition:background .2s}.am-toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0004;transition:transform .2s}.am-toggle:checked{background:#9d3e00}.am-toggle:checked::after{transform:translateX(20px)}
      .am-finance-badge{position:absolute;top:44px;left:12px;z-index:16;padding:6px 10px;border-radius:6px;background:#16833f;color:#fff;font:800 11px 'Plus Jakarta Sans',sans-serif;letter-spacing:.03em;box-shadow:0 2px 6px #0004}
-     .am-featured-track{display:flex!important;align-items:stretch;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px}.am-featured-track .property-card{flex:0 0 min(86vw,380px);scroll-snap-align:start}.am-featured-track::-webkit-scrollbar{height:8px}.am-featured-track::-webkit-scrollbar-thumb{background:#c8cbd0;border-radius:999px}.am-carousel-controls{display:flex;justify-content:flex-end;gap:8px;margin:-12px 0 16px}.am-carousel-controls button{width:38px;height:38px;border:0;border-radius:50%;background:#191c1d;color:#fff;cursor:pointer;font-size:22px}.am-carousel-controls button:hover{background:#9d3e00}
+    .am-featured-track{display:flex!important;align-items:stretch;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 14px}.am-featured-track .property-card{flex:0 0 min(86vw,380px);scroll-snap-align:start}.am-featured-track::-webkit-scrollbar{height:8px}.am-featured-track::-webkit-scrollbar-thumb{background:#c8cbd0;border-radius:999px}.am-carousel-controls{display:flex;justify-content:flex-end;gap:8px;margin:-12px 0 16px}.am-carousel-controls button{width:38px;height:38px;border:0;border-radius:50%;background:#191c1d;color:#fff;cursor:pointer;font-size:22px}.am-carousel-controls button:hover{background:#9d3e00}
+    .am-cards-grid{align-items:stretch;gap:24px}.property-card{display:flex;flex-direction:column;height:100%;min-height:100%;border:1px solid #eee6df;border-radius:14px;background:#fff;box-shadow:0 2px 10px rgba(56,39,31,.045);transition:transform .22s ease,box-shadow .22s ease}.property-card:hover{transform:translateY(-3px);box-shadow:0 9px 24px rgba(56,39,31,.09)}.am-card-media{height:auto;aspect-ratio:4/3;flex:none;border-radius:13px 13px 0 0;background:#eee7df}.carousel-img{object-fit:cover}.property-card:hover .carousel-img.active{transform:scale(1.025)}.am-card-operation{position:absolute;z-index:2;top:14px;left:14px;padding:7px 11px;border-radius:5px;background:var(--am-orange);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.am-card-badges{top:51px;left:14px;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:6px}.am-card-badges .am-badge{padding:6px 9px;border:1px solid rgba(56,39,31,.08);border-radius:5px;background:rgba(255,255,255,.96);color:#70462f;font-size:9px;font-weight:800;letter-spacing:.03em;box-shadow:0 2px 8px rgba(40,28,20,.1)}.am-card-badges .am-badge-sold{background:#59463b;color:#fff}.am-card-body{display:flex;flex:1;flex-direction:column;padding:18px 19px 12px}.am-card-title{margin:9px 0 5px;font-size:16px;line-height:1.35}.am-card-type{color:#8c7160;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.am-card-location{font-size:12px}.am-card-specs{gap:14px;margin-top:auto;padding-top:14px}.am-card-spec{font-size:11px}.am-card-footer{align-items:center;margin-top:auto;padding:0 19px 18px}.am-card-footer .am-card-wa{display:none}.am-card-footer .am-card-price{flex:0 1 auto;margin-right:auto;color:var(--am-brown);font:800 19px/1.2 'Plus Jakarta Sans',sans-serif;letter-spacing:-.03em;white-space:nowrap}.am-card-footer .am-card-detail{flex:0 0 auto;min-width:120px;min-height:38px;padding:0 15px;border-color:#e6d8cc;color:#714633;transition:background .18s ease,border-color .18s ease}.am-card-footer .am-card-detail:hover{border-color:var(--am-orange);background:#fff6ef;color:#b94c17}
+    @media(max-width:760px){.am-cards-grid{gap:16px}.am-card-media{height:auto;aspect-ratio:4/3}.am-card-body{padding:15px 15px 11px}.am-card-footer{padding:0 15px 15px}}
+    @media(max-width:520px){.am-cards-grid{grid-template-columns:1fr}.property-card{max-width:440px;width:100%;margin-inline:auto}.am-card-media{aspect-ratio:4/3}}
     @media(max-width:820px){.am-detail-gallery{grid-template-columns:1fr}.am-detail-main{grid-column:1;grid-row:1}.am-detail-thumbs{grid-column:1;grid-row:2}.am-detail-info{grid-column:1;grid-row:3;max-height:none;overflow:visible;padding-right:0}.am-detail-actions{position:static}}@media(max-width:600px){.am-dialog{padding:20px}.am-title{font-size:21px}.am-admin-row{align-items:flex-start;flex-direction:column}}
   `;
   document.head.append(style);
@@ -72,7 +75,8 @@
   }
   async function refreshProperties() {
     properties = await api(`/api/properties${session?.role === 'admin' ? '?all=1' : ''}`);
-    const heroImage = properties.find(property => property.images?.[0])?.images?.[0];
+    const kitchenProperty = properties.find(property => String(property.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('19 de mayo') && property.images?.length);
+    const heroImage = kitchenProperty?.images?.[0] || properties.find(property => property.images?.[0])?.images?.[0];
     if (heroImage) document.documentElement.style.setProperty('--am-hero-image', `url("${heroImage}")`);
     populateLocationFilters();
     renderProperties();
@@ -250,7 +254,6 @@
       const financingValue = String(property.financing || '').trim().toUpperCase();
       const hasFinancing = financingValue && !['NO', 'NO SE FINANCIA'].includes(financingValue);
       if (financeLanding && !hasCredit && !hasFinancing) return false;
-      if (!financeLanding && !saleLandingOrder && !property.featured) return false;
       if (filters.city && property.city !== filters.city) return false;
       if (filters.text && ![property.title, property.city, property.neighborhood, property.type].join(' ').toLowerCase().includes(filters.text)) return false;
       if (filters.type && property.type !== filters.type) return false;
@@ -272,7 +275,7 @@
       }
       return 0;
     });
-    const showFeaturedCarousel = !saleLandingOrder && !financeLanding;
+    const showFeaturedCarousel = false;
     grid.classList.toggle('am-featured-track', showFeaturedCarousel);
     const host = grid.parentElement;
     host?.querySelector('.am-carousel-controls')?.remove();
@@ -346,6 +349,10 @@
   document.querySelectorAll('#operationTabs .op-tab').forEach(tab => tab.addEventListener('click', () => {
     activeOperation = tab.dataset.op === 'alquilar' ? 'Alquiler' : 'Venta';
     financeLanding = false;
+    saleLandingOrder = true;
+    clearSearchFilters();
+    renderProperties();
+    document.getElementById('propiedades')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
   searchButton?.addEventListener('click', event => {
     event.preventDefault();
@@ -359,7 +366,7 @@
     renderProperties();
     document.getElementById('propertyCardsGrid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
-  document.querySelectorAll('nav a[data-path]').forEach(link => link.addEventListener('click', event => {
+  document.querySelectorAll('a[data-path]').forEach(link => link.addEventListener('click', event => {
     const path = link.dataset.path;
     if (path === 'inicio') {
       event.preventDefault();
@@ -370,6 +377,14 @@
     } else if (path === 'propiedades-en-alquiler') {
       event.preventDefault();
       navigateToProperties('Alquiler');
+    } else if (path === 'propiedades') {
+      event.preventDefault();
+      clearSearchFilters();
+      activeOperation = '';
+      saleLandingOrder = true;
+      financeLanding = false;
+      renderProperties();
+      document.getElementById('propiedades')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (path === 'emprendimientos' || path === 'apto-credito') {
       event.preventDefault();
       navigateToFinance();
@@ -514,6 +529,12 @@
 
     const badges = document.createElement('div');
     badges.className = 'am-card-badges';
+    if (property.operation) {
+      const operation = document.createElement('span');
+      operation.className = 'am-card-operation';
+      operation.textContent = property.operation;
+      media.append(operation);
+    }
     if (property.sold) {
       const sold = document.createElement('span');
       sold.className = 'am-badge am-badge-sold';
@@ -524,31 +545,23 @@
     const creditValue = String(property.aptaCredito ?? '').trim().toUpperCase();
     if (property.aptaCredito === true || ['SI', 'SÍ', 'YES', 'TRUE', 'APTA', 'APTO'].includes(creditValue)) financeLabels.push('Apto crédito');
     const financingValue = String(property.financing || '').trim().toUpperCase();
-    if (financingValue && !['NO', 'NO SE FINANCIA'].includes(financingValue)) financeLabels.push('Se financia');
+    if (property.financing === true || (financingValue && !['NO', 'NO SE FINANCIA', 'FALSE', '0', 'NO APLICA'].includes(financingValue))) financeLabels.push('Se financia');
     if (financeLabels.length) {
-      const financeBadge = document.createElement('span');
-      financeBadge.className = 'am-badge am-badge-finance';
-      financeBadge.textContent = financeLabels.join(' · ');
-      badges.append(financeBadge);
+      financeLabels.forEach(label => {
+        const financeBadge = document.createElement('span');
+        financeBadge.className = 'am-badge am-badge-finance';
+        financeBadge.textContent = label;
+        badges.append(financeBadge);
+      });
     }
     if (badges.children.length) media.append(badges);
 
     const body = document.createElement('div');
     body.className = 'am-card-body';
 
-    const head = document.createElement('div');
-    head.className = 'am-card-head';
     const priceNode = document.createElement('div');
     priceNode.className = 'font-price-card am-card-price';
     priceNode.textContent = price;
-    head.append(priceNode);
-    if (property.operation) {
-      const tag = document.createElement('span');
-      tag.className = 'am-card-tag';
-      tag.textContent = property.operation;
-      head.append(tag);
-    }
-    body.append(head);
 
     if (property.type) {
       const propertyType = document.createElement('span');
@@ -613,8 +626,8 @@
     const detail = document.createElement('button');
     detail.type = 'button';
     detail.className = 'am-card-detail';
-    detail.textContent = 'Ver detalle';
-    footer.append(whatsapp, detail);
+    detail.textContent = 'Ver propiedad';
+    footer.append(whatsapp, priceNode, detail);
     if (session?.role === 'admin') {
       const edit = document.createElement('button');
       edit.type = 'button';
