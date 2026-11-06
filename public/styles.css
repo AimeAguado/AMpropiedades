@@ -79,6 +79,18 @@ a { color: inherit; }
 .am-search-control input::placeholder { color:#a59a91; }
 .am-search-control .am-caret { margin-left:-24px; pointer-events:none; }
 .am-search-control select { appearance:none; padding-right:16px; }
+.am-search-control.am-dropdown-open { position:relative; z-index:30; }
+.am-select-native { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; clip-path:inset(50%)!important; }
+.am-select-trigger { width:100%; min-width:0; display:flex; align-items:center; padding:0 16px 0 0; border:0; outline:0; background:transparent; color:var(--am-brown); font:inherit; font-size:11px; line-height:1.2; text-align:left; cursor:pointer; }
+.am-select-trigger-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.am-search-options { position:absolute; top:calc(100% + 8px); left:-1px; right:-1px; z-index:50; max-height:min(280px,45vh); overflow-y:auto; overscroll-behavior:contain; padding:5px; border:1px solid var(--am-line); border-radius:9px; background:#fff; box-shadow:0 12px 28px rgba(56,39,31,.13); opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-5px); transition:opacity .16s ease,transform .16s ease,visibility .16s; }
+.am-search-options.is-open { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
+.am-search-option { width:100%; min-height:36px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 10px; border:0; border-radius:6px; background:transparent; color:var(--am-brown); font:inherit; font-size:11px; line-height:1.35; text-align:left; cursor:pointer; transition:background .14s ease,color .14s ease; }
+.am-search-option:hover,.am-search-option:focus-visible { outline:0; background:#fff4ec; color:var(--am-orange-dark); }
+.am-search-option[aria-selected="true"] { background:#fff0e7; color:var(--am-orange-dark); font-weight:700; }
+.am-search-option-check { flex:none; color:var(--am-orange); font-size:16px; }
+.am-search-option:not([aria-selected="true"]) .am-search-option-check { visibility:hidden; }
+@media(max-width:480px) { .am-select-trigger,.am-search-option { font-size:10px; } }
 .am-search-submit { min-height:45px; padding-inline:17px; white-space:nowrap; }
 .am-section { padding:88px 0; }
 .am-properties { background:#fff; }

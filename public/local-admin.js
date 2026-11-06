@@ -312,6 +312,98 @@
   const priceSelect = document.getElementById('priceSelect');
   const roomsSelect = document.getElementById('roomsSelect');
   const searchButton = document.getElementById('btnExecuteSearch');
+  const filterDropdowns = [citySelect, propertyTypeSelect, priceSelect, roomsSelect].filter(Boolean).map(select => {
+    const control = select.closest('.am-search-control');
+    const field = select.closest('.am-search-field');
+    const label = field?.querySelector('.am-search-label')?.textContent.trim() || 'Opción';
+    const trigger = document.createElement('button');
+    const triggerLabel = document.createElement('span');
+    const menu = document.createElement('div');
+    const menuId = `${select.id}-options`;
+    trigger.type = 'button';
+    trigger.className = 'am-select-trigger';
+    trigger.id = `${select.id}-trigger`;
+    trigger.setAttribute('aria-label', label);
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-controls', menuId);
+    triggerLabel.className = 'am-select-trigger-label';
+    trigger.append(triggerLabel);
+    menu.className = 'am-search-options';
+    menu.id = menuId;
+    menu.setAttribute('role', 'listbox');
+    menu.setAttribute('aria-label', label);
+    select.classList.add('am-select-native');
+    select.tabIndex = -1;
+    select.setAttribute('aria-hidden', 'true');
+    select.after(trigger);
+    control?.append(menu);
+    if (field) field.htmlFor = trigger.id;
+
+    const syncOptions = () => {
+      triggerLabel.textContent = select.selectedOptions[0]?.textContent || '';
+      menu.replaceChildren(...Array.from(select.options, option => {
+        const item = document.createElement('button');
+        const text = document.createElement('span');
+        const check = document.createElement('span');
+        item.type = 'button';
+        item.className = 'am-search-option';
+        item.setAttribute('role', 'option');
+        item.setAttribute('aria-selected', String(option.value === select.value));
+        item.disabled = option.disabled;
+        item.dataset.value = option.value;
+        text.textContent = option.textContent;
+        check.className = 'material-symbols-outlined am-search-option-check';
+        check.setAttribute('aria-hidden', 'true');
+        check.textContent = 'check';
+        item.append(text, check);
+        item.addEventListener('click', () => {
+          select.value = option.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          closeMenu(true);
+        });
+        return item;
+      }));
+    };
+    const closeMenu = focusTrigger => {
+      menu.classList.remove('is-open');
+      control?.classList.remove('am-dropdown-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (focusTrigger) trigger.focus();
+    };
+    const openMenu = () => {
+      filterDropdowns.forEach(dropdown => dropdown.close(false));
+      menu.classList.add('is-open');
+      control?.classList.add('am-dropdown-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      (menu.querySelector('[aria-selected="true"]:not(:disabled)') || menu.querySelector('.am-search-option:not(:disabled)'))?.focus();
+    };
+    trigger.addEventListener('click', () => trigger.getAttribute('aria-expanded') === 'true' ? closeMenu(false) : openMenu());
+    trigger.addEventListener('keydown', event => {
+      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)) { event.preventDefault(); openMenu(); }
+      else if (event.key === 'Escape') closeMenu(false);
+    });
+    menu.addEventListener('keydown', event => {
+      const options = [...menu.querySelectorAll('.am-search-option:not(:disabled)')];
+      const index = options.indexOf(document.activeElement);
+      let next = null;
+      if (event.key === 'ArrowDown') next = options[Math.min(index + 1, options.length - 1)];
+      else if (event.key === 'ArrowUp') next = options[Math.max(index - 1, 0)];
+      else if (event.key === 'Home') next = options[0];
+      else if (event.key === 'End') next = options[options.length - 1];
+      else if (event.key === 'Escape') { event.preventDefault(); closeMenu(true); return; }
+      if (next) { event.preventDefault(); next.focus(); }
+    });
+    select.addEventListener('change', syncOptions);
+    new MutationObserver(syncOptions).observe(select, { childList: true });
+    syncOptions();
+    return { control, close: closeMenu };
+  });
+  document.addEventListener('pointerdown', event => {
+    filterDropdowns.forEach(dropdown => {
+      if (!dropdown.control?.contains(event.target)) dropdown.close(false);
+    });
+  });
   document.querySelectorAll('[data-valuation]').forEach(button => {
     button.addEventListener('click', event => { event.preventDefault(); openValuationModal(); });
   });
@@ -322,10 +414,11 @@
     filters.price = '';
     filters.bedrooms = '';
     if (searchInput) searchInput.value = '';
-    if (citySelect) citySelect.value = '';
-    if (propertyTypeSelect) propertyTypeSelect.value = '';
-    if (priceSelect) priceSelect.value = '';
-    if (roomsSelect) roomsSelect.value = '';
+    [citySelect, propertyTypeSelect, priceSelect, roomsSelect].forEach(select => {
+      if (!select) return;
+      select.value = '';
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
   }
   function navigateToProperties(operation) {
     clearSearchFilters();
