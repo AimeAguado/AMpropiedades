@@ -552,7 +552,7 @@
       event.preventDefault();
       const email = content.querySelector('#am-login-email').value.trim().toLowerCase();
       const password = content.querySelector('#am-login-password').value;
-      const submit = content.querySelector('button[type="submit"]'); submit.disabled = true;
+      const submit = content.querySelector('button[type="submit"]'); submit.disabled = true; submit.textContent = 'Ingresando…';
       try {
         const result = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
         session = result.user;
@@ -562,7 +562,7 @@
         Promise.all(loads).catch(error => console.error('No se pudieron cargar los datos del panel:', error));
       } catch (error) {
         content.querySelector('#am-login-error').textContent = error.message;
-        submit.disabled = false;
+        submit.disabled = false; submit.textContent = 'Ingresar';
       }
     });
   }

@@ -91,11 +91,14 @@ async function api(req, res, url) {
     return;
   }
   if (req.method === 'POST' && pathname === '/api/auth/login') {
-    const input = await body(req); const user = await users.findOne({ email: String(input.email || '').trim().toLowerCase(), active: true });
+    const input = await body(req); const email = String(input.email || '').trim().toLowerCase();
+    const [user, company] = await Promise.all([
+      users.findOne({ email, active: true }),
+      tenants.findOne({ name: TENANT_NAME, active: true })
+    ]);
     const valid = user && await bcrypt.compare(String(input.password || ''), user.passwordHash || '');
     if (!valid) { send(res, 401, { error: 'Correo o contraseña incorrectos.' }); return; }
-    const company = await tenants.findOne({ _id: user.inmoviliariaId, active: true });
-    if (!company || company.name !== TENANT_NAME) { send(res, 403, { error: 'La cuenta no pertenece a AM Propiedades.' }); return; }
+    if (!company || String(company._id) !== String(user.inmoviliariaId)) { send(res, 403, { error: 'La cuenta no pertenece a AM Propiedades.' }); return; }
     const token = randomBytes(32).toString('hex'); await portalSessions.insertOne({ _id: token, userId: String(user._id), tenantId: String(user.inmoviliariaId), role: user.role, name: user.name, email: user.email, expiresAt: new Date(Date.now() + SESSION_TTL) }); cookie(res, token, SESSION_TTL / 1000); send(res, 200, { user: publicUser(user, company.name) }); return;
   }
   if (req.method === 'POST' && pathname === '/api/auth/logout') { const session = await sessionOf(req); if (session) await portalSessions.deleteOne({ _id: session.token }); cookie(res, '', 0); send(res, 200, { ok: true }); return; }
@@ -173,13 +176,6 @@ async function staticFile(req, res, url) {
 async function init() {
   if (!ready) ready = (async () => {
     await client.connect(); db = client.db(DB_NAME); users = db.collection('appusers'); properties = db.collection('properties'); tenants = db.collection('inmobiliarias'); portalSessions = db.collection('portalSessions');
-    await Promise.all([
-      portalSessions.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }),
-      users.createIndex({ email: 1, active: 1 }),
-      tenants.createIndex({ name: 1, active: 1 }),
-      properties.createIndex({ inmoviliariaId: 1, active: 1, createdAt: -1 }),
-      properties.createIndex({ inmoviliariaId: 1, createdAt: -1 })
-    ]);
     console.log(`AM Propiedades conectado a ${DB_NAME}; tenant ${TENANT_NAME}`);
   })().catch(error => { ready = null; throw error; });
   return ready;
