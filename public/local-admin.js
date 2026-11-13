@@ -22,7 +22,8 @@
     .am-dialog.am-wide{width:min(100%,900px)}.am-title{font:700 24px/1.25 'Plus Jakarta Sans',sans-serif;margin:0 0 6px}.am-muted{color:#62666a;font-size:14px;margin:0 0 20px}
     .am-field{display:grid;gap:6px;margin:14px 0}.am-field label{font-weight:600;font-size:13px}.am-field input,.am-field textarea,.am-field select{width:100%;box-sizing:border-box;border:1px solid #d8dadd;border-radius:9px;padding:11px 12px;font:inherit;background:#fff}.am-field textarea{min-height:100px;resize:vertical}
     .am-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:20px;flex-wrap:wrap}.am-button{border:0;border-radius:9px;padding:11px 16px;font:600 14px 'Inter',sans-serif;cursor:pointer;background:#191c1d;color:white}.am-button.am-secondary{background:#f0f1f2;color:#191c1d}.am-button.am-primary{background:#9d3e00;color:#fff}.am-close{float:right;border:0;background:#f1f2f3;border-radius:50%;height:34px;width:34px;font-size:20px;cursor:pointer}
-    .am-error{color:#b42318;font-size:13px;min-height:18px}.am-admin-row,.am-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.am-admin-row strong,.am-user-row strong{display:block}.am-inline-actions{display:flex;gap:8px;flex-wrap:wrap}.am-small{padding:8px 11px;font-size:12px}.am-hidden{display:none!important}.am-drop{border:1px dashed #b9bdc1;border-radius:9px;padding:13px;color:#62666a;font-size:13px}.am-contact-link{color:inherit;text-decoration:none}.am-property-delete{margin-right:auto;color:#873d31!important;background:#fbefec!important}
+     .am-error{color:#b42318;font-size:13px;min-height:18px}.am-admin-row,.am-user-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.am-admin-row strong,.am-user-row strong{display:block}.am-inline-actions{display:flex;gap:8px;flex-wrap:wrap}.am-small{padding:8px 11px;font-size:12px}.am-hidden{display:none!important}.am-drop{border:1px dashed #b9bdc1;border-radius:9px;padding:13px;color:#62666a;font-size:13px}.am-contact-link{color:inherit;text-decoration:none}.am-property-delete{margin-right:auto;color:#873d31!important;background:#fbefec!important}
+     .am-operation-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.am-operation-option{position:relative;display:flex;align-items:center;gap:11px;min-height:62px;padding:12px 14px;border:1px solid #e5ded7;border-radius:12px;background:#fff;cursor:pointer;transition:border-color .18s,background .18s,box-shadow .18s}.am-operation-option:hover{border-color:#c8916f;background:#fffaf6}.am-operation-option:has(input:checked){border-color:#9d3e00;background:#fff5ed;box-shadow:0 0 0 2px #9d3e0018}.am-operation-option input{position:absolute;opacity:0;pointer-events:none}.am-operation-option .material-symbols-outlined{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#f7eee7;color:#9d3e00;font-size:20px}.am-operation-option span:last-child{display:grid;gap:3px}.am-operation-option strong{font-size:13px}.am-operation-option small{color:#777;font-size:11px}.am-operation-option:has(input:focus-visible){outline:3px solid #d9a17f;outline-offset:2px}.am-upload-zone{position:relative;display:grid;justify-items:center;gap:7px;padding:23px 16px;border:1.5px dashed #d9c6b7;border-radius:13px;background:linear-gradient(145deg,#fffaf6,#f8f3ee);text-align:center;transition:border-color .18s,background .18s}.am-upload-zone:hover,.am-upload-zone.is-dragging{border-color:#9d3e00;background:#fff3e9}.am-upload-zone>input[type=file]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.am-upload-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#f3e5d9;color:#9d3e00}.am-upload-icon .material-symbols-outlined{font-size:22px}.am-upload-title{color:#34251d;font-size:13px;font-weight:700}.am-upload-title span{color:#9d3e00;text-decoration:underline;text-underline-offset:2px}.am-upload-hint,.am-upload-files{color:#777;font-size:11px}.am-upload-files{color:#714633;font-weight:700}.am-upload-zone .am-muted{margin:4px 0 0;font-size:11px}
     .am-whatsapp-float{position:fixed;right:24px;bottom:24px;z-index:70;display:flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:#20b858;color:#fff;text-decoration:none;font:700 15px 'Inter',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .18s,background .18s}.am-whatsapp-float:hover{background:#159447;transform:translateY(-2px)}.am-whatsapp-float svg{width:25px;height:25px;flex:none}
     .am-sold-mark{position:absolute;inset:0;z-index:15;display:grid;place-items:center;pointer-events:none}.am-sold-mark::before{content:"";position:absolute;width:125%;height:8px;background:#d71920;transform:rotate(-24deg);box-shadow:0 1px 3px #0006}.am-sold-mark span{position:relative;padding:8px 18px;background:#d71920;color:#fff;font:800 16px 'Plus Jakarta Sans',sans-serif;letter-spacing:.08em;transform:rotate(-8deg);box-shadow:0 2px 8px #0005}
     .am-photo-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}.am-photo-item{position:relative;border:1px solid #ddd;border-radius:9px;overflow:hidden;background:#f5f5f5}.am-photo-item img{display:block;width:100%;height:78px;object-fit:cover}.am-photo-item label{display:flex;align-items:center;gap:5px;padding:6px;font-size:11px}.am-photo-item input{width:auto}
@@ -554,9 +555,10 @@
       try {
         const result = await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
         session = result.user;
-        await refreshProperties();
-        if (session.role === 'admin') users = await api('/api/users');
         closeModal(); updateHeader();
+        const loads = [refreshProperties()];
+        if (session.role === 'admin') loads.push(api('/api/users').then(result => { users = result; }));
+        Promise.all(loads).catch(error => console.error('No se pudieron cargar los datos del panel:', error));
       } catch (error) {
         content.querySelector('#am-login-error').textContent = error.message;
         submit.disabled = false;
@@ -742,11 +744,30 @@
     if (session?.role !== 'admin') return;
     const editing = Boolean(property);
     const imagesPreview = property?.images?.length ? `<p class="am-muted">${property.images.length} foto(s) guardadas. Seleccioná nuevas para reemplazarlas.</p>` : '';
-    openModal(`<h2 class="am-title" id="am-dialog-title">${editing ? 'Editar propiedad' : 'Publicar propiedad'}</h2><p class="am-muted">Completá los datos visibles en la publicación.</p><form id="am-property-form"><div class="am-field"><label for="am-property-title">Título</label><input id="am-property-title" required maxlength="90" value="${esc(property?.title || '')}"></div><div class="am-field"><label for="am-property-price">Precio</label><input id="am-property-price" required maxlength="50" placeholder="USD 180.000" value="${esc(property?.price || '')}"></div><div class="am-field"><label for="am-property-description">Descripción</label><textarea id="am-property-description" required maxlength="500">${esc(property?.description || '')}</textarea></div><div class="am-field"><label for="am-property-images">Fotos (podés elegir varias)</label><input id="am-property-images" type="file" accept="image/*" multiple><div class="am-drop">Las imágenes se guardan en este navegador. ${imagesPreview}</div></div><p class="am-error" id="am-property-error" role="alert"></p><div class="am-actions">${editing ? '<button class="am-button am-property-delete" type="button" data-delete-property>Eliminar propiedad</button>' : ''}<button class="am-button am-secondary" type="button" data-close>Cancelar</button><button class="am-button am-primary" type="submit">${editing ? 'Guardar cambios' : 'Publicar'}</button></div></form>`);
+    openModal(`<h2 class="am-title" id="am-dialog-title">${editing ? 'Editar propiedad' : 'Publicar propiedad'}</h2><p class="am-muted">Completá los datos visibles en la publicación.</p><form id="am-property-form"><div class="am-field"><label for="am-property-title">Título</label><input id="am-property-title" required maxlength="90" value="${esc(property?.title || '')}"></div><div class="am-field"><label for="am-property-price">Precio</label><input id="am-property-price" required maxlength="50" placeholder="USD 180.000" value="${esc(property?.price || '')}"></div><div class="am-field"><label for="am-property-description">Descripción</label><textarea id="am-property-description" required maxlength="500">${esc(property?.description || '')}</textarea></div><div class="am-field"><label>Fotos de la propiedad</label><div class="am-upload-zone" id="am-upload-zone"><input id="am-property-images" type="file" accept="image/*" multiple aria-label="Elegir fotos de la propiedad"><span class="am-upload-icon"><span class="material-symbols-outlined">add_photo_alternate</span></span><strong class="am-upload-title">Arrastrá tus fotos o <span>elegí archivos</span></strong><span class="am-upload-hint">JPG o PNG · Hasta 8 fotos</span><span class="am-upload-files" id="am-upload-files">Todavía no seleccionaste fotos</span>${imagesPreview ? `<div class="am-muted">${imagesPreview}</div>` : ''}</div></div><p class="am-error" id="am-property-error" role="alert"></p><div class="am-actions">${editing ? '<button class="am-button am-property-delete" type="button" data-delete-property>Eliminar propiedad</button>' : ''}<button class="am-button am-secondary" type="button" data-close>Cancelar</button><button class="am-button am-primary" type="submit">${editing ? 'Guardar cambios' : 'Publicar'}</button></div></form>`);
     content.querySelector('#am-property-description').required = false;
     const imageInput = content.querySelector('#am-property-images');
+    const uploadZone = content.querySelector('#am-upload-zone');
+    const uploadFiles = content.querySelector('#am-upload-files');
+    const updateUploadFiles = () => {
+      const files = [...imageInput.files];
+      uploadFiles.textContent = files.length
+        ? `${files.length > 8 ? 'Se usarán las primeras 8 · ' : ''}${files.slice(0, 8).map(file => file.name).join(', ')}`
+        : 'Todavía no seleccionaste fotos';
+    };
+    imageInput.addEventListener('change', updateUploadFiles);
+    uploadZone.addEventListener('dragover', event => { event.preventDefault(); uploadZone.classList.add('is-dragging'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('is-dragging'));
+    uploadZone.addEventListener('drop', event => {
+      event.preventDefault();
+      uploadZone.classList.remove('is-dragging');
+      if (event.dataTransfer.files.length) {
+        imageInput.files = event.dataTransfer.files;
+        updateUploadFiles();
+      }
+    });
     const descriptionField = content.querySelector('#am-property-description').parentElement;
-    descriptionField.insertAdjacentHTML('beforebegin', `<div class="am-field"><label>Ciudad</label><input id="am-property-city" value="${esc(property?.city || 'Bahía Blanca')}"></div><div class="am-field"><label>Barrio</label><input id="am-property-neighborhood" value="${esc(property?.neighborhood || '')}"></div><div class="am-field"><label>Tipo de propiedad</label><input id="am-property-type" value="${esc(property?.type || 'Casa')}"></div><div class="am-field"><label>Metros cuadrados</label><input id="am-property-area" type="number" min="0" value="${property?.area || ''}"></div><div class="am-field"><label>Habitaciones</label><input id="am-property-bedrooms" type="number" min="0" value="${property?.bedrooms || ''}"></div><div class="am-field"><label>Baños</label><input id="am-property-bathrooms" type="number" min="0" value="${property?.bathrooms || ''}"></div><div class="am-field"><label>Cocheras</label><input id="am-property-parking" type="number" min="0" value="${property?.parkingSpots || ''}"></div>`);
+     descriptionField.insertAdjacentHTML('beforebegin', `<fieldset class="am-field" style="border:0;padding:0;margin:14px 0"><legend style="padding:0 0 7px;font-size:13px;font-weight:600">Tipo de operación</legend><div class="am-operation-options"><label class="am-operation-option"><input type="radio" name="am-property-operation" value="Venta" ${property?.operation !== 'Alquiler' ? 'checked' : ''}><span class="material-symbols-outlined">sell</span><span><strong>Venta</strong><small>Propiedad en venta</small></span></label><label class="am-operation-option"><input type="radio" name="am-property-operation" value="Alquiler" ${property?.operation === 'Alquiler' ? 'checked' : ''}><span class="material-symbols-outlined">key</span><span><strong>Alquiler</strong><small>Propiedad en alquiler</small></span></label></div></fieldset><div class="am-field"><label>Ciudad</label><input id="am-property-city" value="${esc(property?.city || 'Bahía Blanca')}"></div><div class="am-field"><label>Barrio</label><input id="am-property-neighborhood" value="${esc(property?.neighborhood || '')}"></div><div class="am-field"><label>Tipo de propiedad</label><input id="am-property-type" value="${esc(property?.type || 'Casa')}"></div><div class="am-field"><label>Metros cuadrados</label><input id="am-property-area" type="number" min="0" value="${property?.area || ''}"></div><div class="am-field"><label>Habitaciones</label><input id="am-property-bedrooms" type="number" min="0" value="${property?.bedrooms || ''}"></div><div class="am-field"><label>Baños</label><input id="am-property-bathrooms" type="number" min="0" value="${property?.bathrooms || ''}"></div><div class="am-field"><label>Cocheras</label><input id="am-property-parking" type="number" min="0" value="${property?.parkingSpots || ''}"></div>`);
     if (property?.images?.length) {
       imageInput.insertAdjacentHTML('afterend', `<div class="am-photo-list">${property.images.map((image, index) => `<div class="am-photo-item"><img src="${esc(image)}" alt="Foto ${index + 1}"><label><input type="checkbox" data-existing-image value="${esc(image)}" checked> Conservar</label></div>`).join('')}</div>`);
     }
@@ -800,6 +821,7 @@
           description: content.querySelector('#am-property-description').value.trim(),
           city: content.querySelector('#am-property-city').value.trim(),
           neighborhood: content.querySelector('#am-property-neighborhood').value.trim(),
+          operation: content.querySelector('[name="am-property-operation"]:checked').value,
           type: content.querySelector('#am-property-type').value.trim(),
           area: content.querySelector('#am-property-area').value,
           bedrooms: content.querySelector('#am-property-bedrooms').value,
@@ -817,7 +839,7 @@
         });
         await refreshProperties(); closeModal();
       } catch (error) {
-        content.querySelector('#am-property-error').textContent = error.message || 'No se pudo guardar. Probá con menos fotos.';
+        content.querySelector('#am-property-error').textContent = error.message || 'No se pudo guardar la propiedad. Si seleccionaste muchas fotos, probá con menos.';
         submit.disabled = false; submit.textContent = editing ? 'Guardar cambios' : 'Publicar';
       }
     });
@@ -901,10 +923,14 @@
     renderProperties();
     updateHeader();
     try {
-      const result = await api('/api/auth/session');
+      const [result] = await Promise.all([api('/api/auth/session'), refreshProperties()]);
       session = result.user;
-      if (session?.role === 'admin') users = await api('/api/users');
-      await refreshProperties();
+      const loads = [];
+      if (session?.role === 'admin') {
+        loads.push(refreshProperties());
+        loads.push(api('/api/users').then(result => { users = result; }));
+      }
+      await Promise.all(loads);
       updateHeader();
     } catch (error) {
       grid.innerHTML = `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary">No se pudo conectar con el servidor: ${esc(error.message)}</div>`;

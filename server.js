@@ -52,7 +52,7 @@ function localImageUrl(value) {
 function propertyView(property) {
   const sold = property.status === 'entregada';
   const published = Boolean(property.active) && property.status !== 'no_disponible';
-  return { id: String(property._id), title: property.title, price: property.price ? `${property.currency === 'ARS' ? '$' : 'USD '}${property.price.toLocaleString('es-AR')}` : 'Consultar precio', priceValue: property.price || 0, description: property.description || '', images: (property.images || []).map(localImageUrl), published, sold, featured: Boolean(property.featured), createdAt: property.createdAt, operation: property.operation, type: property.type, city: property.city, neighborhood: property.neighborhood || '', ambiences: property.ambiences ?? property.ambientes ?? property.rooms ?? null, bedrooms: property.bedrooms || 0, bathrooms: property.bathrooms || 0, parkingSpots: property.parkingSpots || 0, area: property.totalArea || property.coveredArea || 0, services: property.services || '', aptaCredito: property.aptaCredito, financing: property.financing || '' };
+  return { id: String(property._id), title: property.title, price: property.price ? `${property.currency === 'ARS' ? '$' : 'USD '}${property.price.toLocaleString('es-AR')}` : 'Consultar precio', priceValue: property.price || 0, description: property.description || '', images: (property.images || []).map((image, index) => /^data:image\//i.test(String(image)) ? `/api/property-images/${property._id}/${index}?v=${new Date(property.updatedAt || property.createdAt || 0).getTime()}` : localImageUrl(image)), published, sold, featured: Boolean(property.featured), createdAt: property.createdAt, operation: property.operation, type: property.type, city: property.city, neighborhood: property.neighborhood || '', ambiences: property.ambiences ?? property.ambientes ?? property.rooms ?? null, bedrooms: property.bedrooms || 0, bathrooms: property.bathrooms || 0, parkingSpots: property.parkingSpots || 0, area: property.totalArea || property.coveredArea || 0, services: property.services || '', aptaCredito: property.aptaCredito, financing: property.financing || '' };
 }
 async function tenant() { return tenants.findOne({ name: TENANT_NAME, active: true }); }
 async function adminSession(req, res) { const session = await sessionOf(req); if (!session) { send(res, 401, { error: 'Iniciá sesión para continuar.' }); return null; } if (session.role !== 'admin') { send(res, 403, { error: 'Acción reservada al administrador.' }); return null; } return session; }
@@ -101,6 +101,18 @@ async function api(req, res, url) {
   if (req.method === 'POST' && pathname === '/api/auth/logout') { const session = await sessionOf(req); if (session) await portalSessions.deleteOne({ _id: session.token }); cookie(res, '', 0); send(res, 200, { ok: true }); return; }
   if (req.method === 'GET' && pathname === '/api/auth/session') { const session = await sessionOf(req); const user = session && await users.findOne({ _id: new ObjectId(session.userId), active: true }); send(res, 200, { user: user ? publicUser(user) : null }); return; }
 
+  const propertyImage = pathname.match(/^\/api\/property-images\/([a-f\d]{24})\/(\d+)$/i);
+  if (req.method === 'GET' && propertyImage) {
+    const imageIndex = Number(propertyImage[2]);
+    const property = await properties.findOne({ _id: new ObjectId(propertyImage[1]) }, { projection: { images: { $slice: [imageIndex, 1] } } });
+    const image = property?.images?.[0];
+    const match = typeof image === 'string' && image.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,([\s\S]+)$/);
+    if (!match) { res.writeHead(404); res.end(); return; }
+    res.writeHead(200, { 'Content-Type': match[1], 'Content-Length': Buffer.byteLength(match[2], 'base64'), 'Cache-Control': 'public, max-age=300', 'X-Content-Type-Options': 'nosniff' });
+    res.end(Buffer.from(match[2], 'base64'));
+    return;
+  }
+
   const company = await tenant();
   if (!company) { send(res, 503, { error: 'AM Propiedades todavía no está configurada en InmoTask.' }); return; }
   const current = await sessionOf(req);
@@ -108,7 +120,33 @@ async function api(req, res, url) {
 
   if (pathname === '/api/properties' && req.method === 'GET') {
     const query = { inmoviliariaId: company._id, ...(current?.role === 'admin' && sameTenant && searchParams.get('all') === '1' ? {} : { active: true }) };
-    const list = await properties.find(query).sort({ createdAt: -1 }).toArray(); send(res, 200, list.map(propertyView)); return;
+    const list = await properties.aggregate([
+      { $match: query },
+      { $sort: { createdAt: -1 } },
+      {
+        $set: {
+          images: {
+            $map: {
+              input: { $range: [0, { $size: { $ifNull: ['$images', []] } }] },
+              as: 'index',
+              in: {
+                $let: {
+                  vars: { image: { $arrayElemAt: [{ $ifNull: ['$images', []] }, '$$index'] } },
+                  in: {
+                    $cond: [
+                      { $regexMatch: { input: '$$image', regex: '^data:image/' } },
+                      { $concat: ['/api/property-images/', { $toString: '$_id' }, '/', { $toString: '$$index' }, '?v=', { $toString: { $toLong: { $ifNull: ['$updatedAt', '$createdAt'] } } }] },
+                      '$$image'
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      { $project: { _id: 1, title: 1, price: 1, currency: 1, description: 1, images: 1, active: 1, status: 1, featured: 1, createdAt: 1, updatedAt: 1, operation: 1, type: 1, city: 1, neighborhood: 1, ambiences: 1, ambientes: 1, rooms: 1, bedrooms: 1, bathrooms: 1, parkingSpots: 1, totalArea: 1, coveredArea: 1, services: 1, aptaCredito: 1, financing: 1 } }
+    ]).toArray(); send(res, 200, list.map(propertyView)); return;
   }
   if (pathname === '/api/properties' && req.method === 'POST') {
     if (!await adminSession(req, res)) return; const input = await body(req); const count = await properties.countDocuments({ inmoviliariaId: company._id });
@@ -119,7 +157,7 @@ async function api(req, res, url) {
   if (propertyId && ['PATCH', 'DELETE'].includes(req.method)) {
     if (!await adminSession(req, res)) return; const id = new ObjectId(propertyId); const existing = await properties.findOne({ _id: id, inmoviliariaId: company._id }); if (!existing) { send(res, 404, { error: 'Propiedad inexistente.' }); return; }
     if (req.method === 'DELETE') { await properties.deleteOne({ _id: id }); send(res, 200, { ok: true }); return; }
-    const input = await body(req); const update = { updatedAt: new Date() }; if (input.title !== undefined) update.title = String(input.title).trim(); if (input.description !== undefined) update.description = String(input.description).trim(); if (input.price !== undefined) { update.price = priceValue(input.price); update.currency = String(input.price).includes('$') && !String(input.price).includes('USD') ? 'ARS' : 'USD'; } if (input.images !== undefined) { update.images = input.images; update.imageUrl = input.images[0] || ''; } if (input.neighborhood !== undefined) update.neighborhood = String(input.neighborhood).trim(); if (input.city !== undefined) update.city = String(input.city).trim(); if (input.type !== undefined) update.type = String(input.type).trim(); if (input.operation !== undefined) update.operation = String(input.operation).trim(); if (input.area !== undefined) update.coveredArea = update.totalArea = Number(input.area) || 0; if (input.bedrooms !== undefined) update.bedrooms = Number(input.bedrooms) || 0; if (input.bathrooms !== undefined) update.bathrooms = Number(input.bathrooms) || 0; if (input.parkingSpots !== undefined) update.parkingSpots = Number(input.parkingSpots) || 0; if (input.aptaCredito !== undefined) update.aptaCredito = Boolean(input.aptaCredito); if (input.financing !== undefined) update.financing = String(input.financing).trim(); if (input.featured !== undefined) update.featured = Boolean(input.featured); if (input.published !== undefined) { update.active = Boolean(input.published); if (update.active && existing.status === 'no_disponible') update.status = 'disponible'; } if (input.sold !== undefined) update.status = input.sold ? 'entregada' : 'disponible'; await properties.updateOne({ _id: id }, { $set: update }); send(res, 200, propertyView({ ...existing, ...update, _id: id })); return;
+    const input = await body(req); const update = { updatedAt: new Date() }; if (input.title !== undefined) update.title = String(input.title).trim(); if (input.description !== undefined) update.description = String(input.description).trim(); if (input.price !== undefined) { update.price = priceValue(input.price); update.currency = String(input.price).includes('$') && !String(input.price).includes('USD') ? 'ARS' : 'USD'; } if (input.images !== undefined) { update.images = input.images.map(image => { const match = String(image).match(/^\/api\/property-images\/([a-f\d]{24})\/(\d+)(?:\?.*)?$/i); return match && match[1] === propertyId ? existing.images?.[Number(match[2])] || image : image; }); update.imageUrl = update.images[0] || ''; } if (input.neighborhood !== undefined) update.neighborhood = String(input.neighborhood).trim(); if (input.city !== undefined) update.city = String(input.city).trim(); if (input.type !== undefined) update.type = String(input.type).trim(); if (input.operation !== undefined) update.operation = String(input.operation).trim(); if (input.area !== undefined) update.coveredArea = update.totalArea = Number(input.area) || 0; if (input.bedrooms !== undefined) update.bedrooms = Number(input.bedrooms) || 0; if (input.bathrooms !== undefined) update.bathrooms = Number(input.bathrooms) || 0; if (input.parkingSpots !== undefined) update.parkingSpots = Number(input.parkingSpots) || 0; if (input.aptaCredito !== undefined) update.aptaCredito = Boolean(input.aptaCredito); if (input.financing !== undefined) update.financing = String(input.financing).trim(); if (input.featured !== undefined) update.featured = Boolean(input.featured); if (input.published !== undefined) { update.active = Boolean(input.published); if (update.active && existing.status === 'no_disponible') update.status = 'disponible'; } if (input.sold !== undefined) update.status = input.sold ? 'entregada' : 'disponible'; await properties.updateOne({ _id: id }, { $set: update }); send(res, 200, propertyView({ ...existing, ...update, _id: id })); return;
   }
   if (pathname === '/api/users' && req.method === 'GET') { if (!await adminSession(req, res)) return; const list = await users.find({ inmoviliariaId: company._id }, { projection: { passwordHash: 0 } }).toArray(); send(res, 200, list.map(user => publicUser(user, company.name))); return; }
   if (pathname === '/api/users' && req.method === 'POST') { if (!await adminSession(req, res)) return; const input = await body(req); const email = String(input.email || '').trim().toLowerCase(); if (!email || !input.name || !input.password) { send(res, 400, { error: 'Completá nombre, correo y contraseña.' }); return; } if (await users.findOne({ email })) { send(res, 409, { error: 'Ya existe una cuenta con ese correo.' }); return; } const user = { firstName: String(input.name).split(' ')[0], lastName: String(input.name).split(' ').slice(1).join(' ') || '-', name: String(input.name).trim(), email, passwordHash: await bcrypt.hash(String(input.password), 12), role: 'asesor', inmoviliariaId: company._id, active: true, phone: '', license: '', avatar: '', createdAt: new Date(), updatedAt: new Date() }; const result = await users.insertOne(user); send(res, 201, publicUser({ ...user, _id: result.insertedId }, company.name)); return; }
@@ -134,7 +172,13 @@ async function staticFile(req, res, url) {
 async function init() {
   if (!ready) ready = (async () => {
     await client.connect(); db = client.db(DB_NAME); users = db.collection('appusers'); properties = db.collection('properties'); tenants = db.collection('inmobiliarias'); portalSessions = db.collection('portalSessions');
-    await portalSessions.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }).catch(() => {});
+    await Promise.all([
+      portalSessions.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }),
+      users.createIndex({ email: 1, active: 1 }),
+      tenants.createIndex({ name: 1, active: 1 }),
+      properties.createIndex({ inmoviliariaId: 1, active: 1, createdAt: -1 }),
+      properties.createIndex({ inmoviliariaId: 1, createdAt: -1 })
+    ]);
     console.log(`AM Propiedades conectado a ${DB_NAME}; tenant ${TENANT_NAME}`);
   })().catch(error => { ready = null; throw error; });
   return ready;
