@@ -11,7 +11,7 @@ const PORT = Number(process.env.PORT || 4173);
 const DB_NAME = process.env.MONGODB_DB_NAME || 'inmotask';
 const TENANT_NAME = process.env.AM_INMOBILIARIA_NAME || 'AM Propiedades';
 const STATIC_ROOT = path.join(__dirname, 'public');
-const SESSION_TTL = 12 * 60 * 60 * 1000;
+const SESSION_TTL = 10 * 365 * 24 * 60 * 60 * 1000;
 const mimeTypes = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.jpeg': 'image/jpeg', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' };
 
 function mongoConnectionString() {
@@ -99,7 +99,7 @@ async function api(req, res, url) {
     const token = randomBytes(32).toString('hex'); await portalSessions.insertOne({ _id: token, userId: String(user._id), tenantId: String(user.inmoviliariaId), role: user.role, name: user.name, email: user.email, expiresAt: new Date(Date.now() + SESSION_TTL) }); cookie(res, token, SESSION_TTL / 1000); send(res, 200, { user: publicUser(user, company.name) }); return;
   }
   if (req.method === 'POST' && pathname === '/api/auth/logout') { const session = await sessionOf(req); if (session) await portalSessions.deleteOne({ _id: session.token }); cookie(res, '', 0); send(res, 200, { ok: true }); return; }
-  if (req.method === 'GET' && pathname === '/api/auth/session') { const session = await sessionOf(req); const user = session && await users.findOne({ _id: new ObjectId(session.userId), active: true }); send(res, 200, { user: user ? publicUser(user) : null }); return; }
+  if (req.method === 'GET' && pathname === '/api/auth/session') { const session = await sessionOf(req); const user = session && await users.findOne({ _id: new ObjectId(session.userId), active: true }); if (session && user) cookie(res, session.token, SESSION_TTL / 1000); send(res, 200, { user: user ? publicUser(user) : null }); return; }
 
   const propertyImage = pathname.match(/^\/api\/property-images\/([a-f\d]{24})\/(\d+)$/i);
   if (req.method === 'GET' && propertyImage) {
