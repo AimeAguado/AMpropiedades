@@ -67,6 +67,7 @@
   let activeOperation = '';
   let saleLandingOrder = false;
   let financeLanding = false;
+  const publicPropertiesCacheKey = 'ampropiedades:public-properties:v1';
   const filters = { text: '', city: '', type: '', price: '', bedrooms: '' };
   function populateLocationFilters() {
     const citySelect = document.getElementById('citySelect');
@@ -78,6 +79,9 @@
   }
   async function refreshProperties() {
     properties = await api(`/api/properties${session?.role === 'admin' ? '?all=1' : ''}`);
+    if (session?.role !== 'admin') {
+      try { localStorage.setItem(publicPropertiesCacheKey, JSON.stringify(properties)); } catch {}
+    }
     const kitchenProperty = properties.find(property => String(property.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('19 de mayo') && property.images?.length);
     const heroImage = kitchenProperty?.images?.[0] || properties.find(property => property.images?.[0])?.images?.[0];
     if (heroImage) document.documentElement.style.setProperty('--am-hero-image', `url("${heroImage}")`);
@@ -920,7 +924,12 @@
 
   async function initialize() {
     resetSearchFilters();
+    try {
+      const cached = JSON.parse(localStorage.getItem(publicPropertiesCacheKey) || 'null');
+      if (Array.isArray(cached)) properties = cached;
+    } catch {}
     renderProperties();
+    if (properties.length) populateLocationFilters();
     updateHeader();
     try {
       const [result] = await Promise.all([api('/api/auth/session'), refreshProperties()]);
@@ -933,7 +942,7 @@
       await Promise.all(loads);
       updateHeader();
     } catch (error) {
-      grid.innerHTML = `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary">No se pudo conectar con el servidor: ${esc(error.message)}</div>`;
+      if (!properties.length) grid.innerHTML = `<div class="col-span-full rounded-xl bg-surface-container-lowest p-8 text-center text-secondary">No se pudo conectar con el servidor: ${esc(error.message)}</div>`;
     }
   }
   initialize();
