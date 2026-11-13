@@ -82,9 +82,6 @@
     if (session?.role !== 'admin') {
       try { localStorage.setItem(publicPropertiesCacheKey, JSON.stringify(properties)); } catch {}
     }
-    const kitchenProperty = properties.find(property => String(property.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('19 de mayo') && property.images?.length);
-    const heroImage = kitchenProperty?.images?.[0] || properties.find(property => property.images?.[0])?.images?.[0];
-    if (heroImage) document.documentElement.style.setProperty('--am-hero-image', `url("${heroImage}")`);
     populateLocationFilters();
     renderProperties();
     return properties;
