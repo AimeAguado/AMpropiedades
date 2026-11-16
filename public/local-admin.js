@@ -855,10 +855,10 @@
         const image = new Image();
         image.onerror = reject;
         image.onload = () => {
-          const scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+          const scale = Math.min(1, 1200 / Math.max(image.width, image.height));
           const canvas = document.createElement('canvas'); canvas.width = Math.round(image.width * scale); canvas.height = Math.round(image.height * scale);
           canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-          resolve(canvas.toDataURL('image/jpeg', 0.78));
+          resolve(canvas.toDataURL('image/jpeg', 0.65));
         };
         image.src = reader.result;
       };

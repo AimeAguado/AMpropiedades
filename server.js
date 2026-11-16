@@ -155,7 +155,10 @@ async function api(req, res, url) {
     if (!await adminSession(req, res)) return; const input = await body(req); const count = await properties.countDocuments({ inmoviliariaId: company._id });
   const selectedCurrency = String(input.currency || '').toUpperCase();
   const doc = { inmoviliariaId: company._id, code: `AM-${String(count + 1).padStart(4, '0')}`, title: String(input.title || '').trim(), type: String(input.type || 'Casa'), operation: String(input.operation || 'Venta'), status: 'disponible', address: '', neighborhood: String(input.neighborhood || '').trim(), city: String(input.city || 'Bahía Blanca'), coveredArea: Number(input.area) || 0, totalArea: Number(input.area) || 0, bedrooms: Number(input.bedrooms) || 0, bathrooms: Number(input.bathrooms) || 0, parkingSpots: Number(input.parkingSpots) || 0, keysLocation: 'Oficina Central', signageStatus: 'Pendiente de Colocación', imageUrl: input.images?.[0] || '', images: input.images || [], description: String(input.description || '').trim(), price: priceValue(input.price), currency: ['ARS', 'USD'].includes(selectedCurrency) ? selectedCurrency : (String(input.price || '').includes('$') && !String(input.price || '').includes('USD') ? 'ARS' : 'USD'), services: '', aptaCredito: Boolean(input.aptaCredito), financing: String(input.financing || '').trim(), active: true, source: 'portal-ampropiedades', featured: Boolean(input.featured), tags: [], assignedAgent: { name: current.name, avatar: '', role: 'Administrador', phone: '', email: current.email }, createdAt: new Date(), updatedAt: new Date() };
-    if (!doc.title || !doc.description) { send(res, 400, { error: 'Completá título y descripción.' }); return; } const result = await properties.insertOne(doc); send(res, 201, propertyView({ ...doc, _id: result.insertedId })); return;
+     if (!doc.title || !doc.description) { send(res, 400, { error: 'Completá título y descripción.' }); return; }
+     const imageBytes = doc.images.reduce((total, image) => total + (typeof image === 'string' && image.startsWith('data:image/') ? Math.ceil((image.length - image.indexOf(',') - 1) * 0.75) : 0), 0);
+     if (imageBytes > 12 * 1024 * 1024) { send(res, 413, { error: 'Las fotos ocupan demasiado espacio. Probá con menos fotos o imágenes más livianas.' }); return; }
+     const result = await properties.insertOne(doc); send(res, 201, propertyView({ ...doc, _id: result.insertedId })); return;
   }
   const propertyId = pathname.match(/^\/api\/properties\/([a-f\d]{24})$/i)?.[1];
   if (propertyId && ['PATCH', 'DELETE'].includes(req.method)) {
@@ -189,7 +192,7 @@ async function handler(req, res) {
     else if (req.method === 'GET') await staticFile(req, res, url);
     else send(res, 405, { error: 'Método no permitido.' });
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     if (!res.headersSent) send(res, error.status || 500, { error: error.status ? error.message : 'Error interno.' });
   }
 }
